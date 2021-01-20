@@ -99,12 +99,23 @@ extension TaskViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension TaskViewController: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    numberOfItemsInSection section: Int
+  ) -> Int {
     return 10
   }
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    UICollectionViewCell()
+  func collectionView(
+    _ collectionView: UICollectionView,
+    cellForItemAt indexPath: IndexPath
+  ) -> UICollectionViewCell {
+    guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: PeriodCell.className,
+            for: indexPath
+    ) as? PeriodCell else { fatalError() }
+    cell.configure(periodTypes[indexPath.section])
+    return cell
   }
 }
 

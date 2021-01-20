@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum PeriodType: CaseIterable {
   case daily
@@ -21,6 +22,15 @@ extension PeriodType {
     case .weekly: return "Weekly"
     case .monthly: return "Monthly"
     case .yearly: return "Yearly"
+    }
+  }
+  
+  var color: UIColor {
+    switch self {
+    case .daily: return 
+    case .weekly: return 
+    case .monthly: return 
+    case .yearly: return 
     }
   }
 }

@@ -15,6 +15,9 @@ final class PeriodView: BaseView {
       frame: .zero,
       collectionViewLayout: layout
     )
+    layout.minimumInteritemSpacing = 0
+    layout.minimumLineSpacing = 16
+    layout.scrollDirection = .horizontal
     return cv
   }()
 }
@@ -31,6 +34,7 @@ extension PeriodView {
       $0.font = Font.champagneBold.withSize(16)
       $0.textColor = Color.greyishBrown
     }
+    
     collectionView.do {
       $0.add(to: self)
       $0.snp.makeConstraints { (make) in
@@ -38,8 +42,8 @@ extension PeriodView {
         make.top.equalTo(titleLabel.snp.bottom).offset(8)
         make.bottom.equalToSuperview().offset(-8)
       }
-      $0.backgroundColor = .red
-      $0.register(cellType: UICollectionViewCell.self)
+      $0.isPagingEnabled = true
+      $0.register(cellType: PeriodCell.self)
     }
   }
 }

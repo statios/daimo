@@ -23,6 +23,8 @@
 		F972D38825B85BD300C4959C /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D38725B85BD300C4959C /* BaseView.swift */; };
 		F972D38D25B86F5800C4959C /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D38C25B86F5800C4959C /* UICollectionView.swift */; };
 		F972D39225B8705000C4959C /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D39125B8705000C4959C /* Device.swift */; };
+		F972D39725B8986400C4959C /* PeriodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D39625B8986400C4959C /* PeriodCell.swift */; };
+		F972D39C25B8988000C4959C /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D39B25B8988000C4959C /* BaseCollectionViewCell.swift */; };
 		F9BB777825B7867900616024 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB777725B7867900616024 /* AppDelegate.swift */; };
 		F9BB778225B7867900616024 /* Daimo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9BB778025B7867900616024 /* Daimo.xcdatamodeld */; };
 		F9BB778425B7867A00616024 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BB778325B7867A00616024 /* Images.xcassets */; };
@@ -78,6 +80,8 @@
 		F972D38725B85BD300C4959C /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		F972D38C25B86F5800C4959C /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		F972D39125B8705000C4959C /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		F972D39625B8986400C4959C /* PeriodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodCell.swift; sourceTree = "<group>"; };
+		F972D39B25B8988000C4959C /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		F9BB777425B7867900616024 /* Daimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Daimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9BB777725B7867900616024 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9BB778125B7867900616024 /* Daimo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Daimo.xcdatamodel; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				F972D37725B85ABD00C4959C /* PeriodView.swift */,
+				F972D39625B8986400C4959C /* PeriodCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -357,6 +362,7 @@
 				F9BB781525B78A1200616024 /* BaseViewModel.swift */,
 				F972D33F25B8536600C4959C /* BaseNavigationController.swift */,
 				F972D38725B85BD300C4959C /* BaseView.swift */,
+				F972D39B25B8988000C4959C /* BaseCollectionViewCell.swift */,
 			);
 			path = Bases;
 			sourceTree = "<group>";
@@ -546,6 +552,7 @@
 				F972D32125B81CC200C4959C /* DateService.swift in Sources */,
 				F972D38825B85BD300C4959C /* BaseView.swift in Sources */,
 				F9BB780625B789DC00616024 /* Log.swift in Sources */,
+				F972D39C25B8988000C4959C /* BaseCollectionViewCell.swift in Sources */,
 				F972D38D25B86F5800C4959C /* UICollectionView.swift in Sources */,
 				F9C98C6E25B78F240027AC60 /* ObservableType+.swift in Sources */,
 				F9BB781625B78A1200616024 /* BaseViewModel.swift in Sources */,
@@ -553,6 +560,7 @@
 				F972D39225B8705000C4959C /* Device.swift in Sources */,
 				F9BB777825B7867900616024 /* AppDelegate.swift in Sources */,
 				F9BB77FE25B789A800616024 /* SplashViewModel.swift in Sources */,
+				F972D39725B8986400C4959C /* PeriodCell.swift in Sources */,
 				F972D33825B8520200C4959C /* NSObject+.swift in Sources */,
 				F972D37825B85ABD00C4959C /* PeriodView.swift in Sources */,
 				F9C98C7425B78F860027AC60 /* TaskViewController.swift in Sources */,
