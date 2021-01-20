@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F972D32125B81CC200C4959C /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32025B81CC200C4959C /* DateService.swift */; };
+		F972D32A25B8508D00C4959C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32925B8508D00C4959C /* UIView+.swift */; };
+		F972D33225B851C100C4959C /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D33125B851C100C4959C /* UITableView+.swift */; };
+		F972D33825B8520200C4959C /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D33725B8520200C4959C /* NSObject+.swift */; };
+		F972D34025B8536600C4959C /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D33F25B8536600C4959C /* BaseNavigationController.swift */; };
+		F972D34625B8542800C4959C /* PeriodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D34525B8542800C4959C /* PeriodType.swift */; };
+		F972D35225B854CA00C4959C /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = F972D35125B854CA00C4959C /* Resolver */; };
+		F972D35725B854DC00C4959C /* AppDelegate+Inject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D35625B854DC00C4959C /* AppDelegate+Inject.swift */; };
 		F9BB777825B7867900616024 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB777725B7867900616024 /* AppDelegate.swift */; };
 		F9BB778225B7867900616024 /* Daimo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9BB778025B7867900616024 /* Daimo.xcdatamodeld */; };
 		F9BB778425B7867A00616024 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BB778325B7867A00616024 /* Images.xcassets */; };
@@ -18,6 +26,15 @@
 		F9BB77CD25B787D200616024 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = F9BB77CC25B787D200616024 /* RxCocoa */; };
 		F9BB77CF25B787D200616024 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F9BB77CE25B787D200616024 /* RxSwift */; };
 		F9BB77D525B787F200616024 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F9BB77D425B787F200616024 /* SnapKit */; };
+		F9BB77F625B789A200616024 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB77F525B789A200616024 /* SplashViewController.swift */; };
+		F9BB77FE25B789A800616024 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB77FD25B789A800616024 /* SplashViewModel.swift */; };
+		F9BB780625B789DC00616024 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB780525B789DC00616024 /* Log.swift */; };
+		F9BB781125B78A0E00616024 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB781025B78A0E00616024 /* BaseViewController.swift */; };
+		F9BB781625B78A1200616024 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB781525B78A1200616024 /* BaseViewModel.swift */; };
+		F9C98C6625B78E690027AC60 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C98C6525B78E690027AC60 /* UIViewController+Rx.swift */; };
+		F9C98C6E25B78F240027AC60 /* ObservableType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C98C6D25B78F240027AC60 /* ObservableType+.swift */; };
+		F9C98C7425B78F860027AC60 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C98C7325B78F860027AC60 /* TaskViewController.swift */; };
+		F9C98C7C25B78F8B0027AC60 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C98C7B25B78F8B0027AC60 /* TaskViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +55,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F972D32025B81CC200C4959C /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
+		F972D32925B8508D00C4959C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		F972D33125B851C100C4959C /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
+		F972D33725B8520200C4959C /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
+		F972D33F25B8536600C4959C /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		F972D34525B8542800C4959C /* PeriodType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodType.swift; sourceTree = "<group>"; };
+		F972D35625B854DC00C4959C /* AppDelegate+Inject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Inject.swift"; sourceTree = "<group>"; };
 		F9BB777425B7867900616024 /* Daimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Daimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9BB777725B7867900616024 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9BB778125B7867900616024 /* Daimo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Daimo.xcdatamodel; sourceTree = "<group>"; };
@@ -50,6 +74,15 @@
 		F9BB779825B7867A00616024 /* DaimoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DaimoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9BB779C25B7867A00616024 /* DaimoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaimoUITests.swift; sourceTree = "<group>"; };
 		F9BB779E25B7867A00616024 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9BB77F525B789A200616024 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		F9BB77FD25B789A800616024 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		F9BB780525B789DC00616024 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		F9BB781025B78A0E00616024 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		F9BB781525B78A1200616024 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		F9C98C6525B78E690027AC60 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		F9C98C6D25B78F240027AC60 /* ObservableType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+.swift"; sourceTree = "<group>"; };
+		F9C98C7325B78F860027AC60 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		F9C98C7B25B78F8B0027AC60 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F972D35225B854CA00C4959C /* Resolver in Frameworks */,
 				F9BB77CD25B787D200616024 /* RxCocoa in Frameworks */,
 				F9BB77CB25B787D200616024 /* RxRelay in Frameworks */,
 				F9BB77CF25B787D200616024 /* RxSwift in Frameworks */,
@@ -82,6 +116,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F972D31F25B81CA700C4959C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F972D32025B81CC200C4959C /* DateService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F972D32825B8508700C4959C /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				F972D32925B8508D00C4959C /* UIView+.swift */,
+				F972D33125B851C100C4959C /* UITableView+.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		F972D33625B851FC00C4959C /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				F972D33725B8520200C4959C /* NSObject+.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		F972D34425B8541900C4959C /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				F972D34525B8542800C4959C /* PeriodType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		F9BB776B25B7867800616024 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +202,9 @@
 			children = (
 				F9BB77BA25B7870C00616024 /* Application */,
 				F9BB77B925B7870300616024 /* Scenes */,
+				F972D31F25B81CA700C4959C /* Services */,
+				F972D34425B8541900C4959C /* Enums */,
+				F9BB780225B789BF00616024 /* Commons */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -160,6 +230,8 @@
 		F9BB77B925B7870300616024 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F9BB77F425B7899800616024 /* Splash */,
+				F9C98C7225B78F6D0027AC60 /* Task */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -168,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				F9BB777725B7867900616024 /* AppDelegate.swift */,
+				F972D35625B854DC00C4959C /* AppDelegate+Inject.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -204,6 +277,71 @@
 			path = datamodeleds;
 			sourceTree = "<group>";
 		};
+		F9BB77F425B7899800616024 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				F9BB77F525B789A200616024 /* SplashViewController.swift */,
+				F9BB77FD25B789A800616024 /* SplashViewModel.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		F9BB780225B789BF00616024 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				F9C98C6325B78E460027AC60 /* Extensions */,
+				F9BB780425B789D000616024 /* Bases */,
+				F9BB780325B789CB00616024 /* Utils */,
+			);
+			path = Commons;
+			sourceTree = "<group>";
+		};
+		F9BB780325B789CB00616024 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F9BB780525B789DC00616024 /* Log.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F9BB780425B789D000616024 /* Bases */ = {
+			isa = PBXGroup;
+			children = (
+				F9BB781025B78A0E00616024 /* BaseViewController.swift */,
+				F9BB781525B78A1200616024 /* BaseViewModel.swift */,
+				F972D33F25B8536600C4959C /* BaseNavigationController.swift */,
+			);
+			path = Bases;
+			sourceTree = "<group>";
+		};
+		F9C98C6325B78E460027AC60 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F972D33625B851FC00C4959C /* Foundation */,
+				F972D32825B8508700C4959C /* UIKit */,
+				F9C98C6425B78E5E0027AC60 /* Reactive */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F9C98C6425B78E5E0027AC60 /* Reactive */ = {
+			isa = PBXGroup;
+			children = (
+				F9C98C6525B78E690027AC60 /* UIViewController+Rx.swift */,
+				F9C98C6D25B78F240027AC60 /* ObservableType+.swift */,
+			);
+			path = Reactive;
+			sourceTree = "<group>";
+		};
+		F9C98C7225B78F6D0027AC60 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				F9C98C7325B78F860027AC60 /* TaskViewController.swift */,
+				F9C98C7B25B78F8B0027AC60 /* TaskViewModel.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -226,6 +364,7 @@
 				F9BB77CC25B787D200616024 /* RxCocoa */,
 				F9BB77CE25B787D200616024 /* RxSwift */,
 				F9BB77D425B787F200616024 /* SnapKit */,
+				F972D35125B854CA00C4959C /* Resolver */,
 			);
 			productName = Daimo;
 			productReference = F9BB777425B7867900616024 /* Daimo.app */;
@@ -302,6 +441,7 @@
 				F9BB77C325B787B000616024 /* XCRemoteSwiftPackageReference "Then" */,
 				F9BB77C925B787D200616024 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				F9BB77D325B787F200616024 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				F972D35025B854CA00C4959C /* XCRemoteSwiftPackageReference "Resolver" */,
 			);
 			productRefGroup = F9BB777525B7867900616024 /* Products */;
 			projectDirPath = "";
@@ -345,8 +485,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9C98C7C25B78F8B0027AC60 /* TaskViewModel.swift in Sources */,
+				F972D34625B8542800C4959C /* PeriodType.swift in Sources */,
+				F9BB77F625B789A200616024 /* SplashViewController.swift in Sources */,
 				F9BB778225B7867900616024 /* Daimo.xcdatamodeld in Sources */,
+				F972D33225B851C100C4959C /* UITableView+.swift in Sources */,
+				F972D35725B854DC00C4959C /* AppDelegate+Inject.swift in Sources */,
+				F972D32125B81CC200C4959C /* DateService.swift in Sources */,
+				F9BB780625B789DC00616024 /* Log.swift in Sources */,
+				F9C98C6E25B78F240027AC60 /* ObservableType+.swift in Sources */,
+				F9BB781625B78A1200616024 /* BaseViewModel.swift in Sources */,
+				F972D34025B8536600C4959C /* BaseNavigationController.swift in Sources */,
 				F9BB777825B7867900616024 /* AppDelegate.swift in Sources */,
+				F9BB77FE25B789A800616024 /* SplashViewModel.swift in Sources */,
+				F972D33825B8520200C4959C /* NSObject+.swift in Sources */,
+				F9C98C7425B78F860027AC60 /* TaskViewController.swift in Sources */,
+				F972D32A25B8508D00C4959C /* UIView+.swift in Sources */,
+				F9C98C6625B78E690027AC60 /* UIViewController+Rx.swift in Sources */,
+				F9BB781125B78A0E00616024 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,7 +600,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				INFOPLIST_FILE = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -499,7 +656,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				INFOPLIST_FILE = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -516,7 +674,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4YL8LS5ZJC;
-				INFOPLIST_FILE = Daimo/Info.plist;
+				INFOPLIST_FILE = Daimo/Supportings/plists/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -536,7 +694,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4YL8LS5ZJC;
-				INFOPLIST_FILE = Daimo/Info.plist;
+				INFOPLIST_FILE = Daimo/Supportings/plists/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -675,6 +833,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F972D35025B854CA00C4959C /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
 		F9BB77C325B787B000616024 /* XCRemoteSwiftPackageReference "Then" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then";
@@ -702,6 +868,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F972D35125B854CA00C4959C /* Resolver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F972D35025B854CA00C4959C /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = Resolver;
+		};
 		F9BB77C425B787B000616024 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F9BB77C325B787B000616024 /* XCRemoteSwiftPackageReference "Then" */;
