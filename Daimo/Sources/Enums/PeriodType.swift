@@ -27,10 +27,10 @@ extension PeriodType {
   
   var color: UIColor {
     switch self {
-    case .daily: return 
-    case .weekly: return 
-    case .monthly: return 
-    case .yearly: return 
+    case .daily: return Color.peach
+    case .weekly: return Color.paleTeal
+    case .monthly: return Color.lightGreyBlue
+    case .yearly: return Color.lavenderPink
     }
   }
 }

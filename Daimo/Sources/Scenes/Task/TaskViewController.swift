@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 final class TaskViewController: BaseViewController {
+  struct Metric {
+    static let periodViewHeight: CGFloat = .init(156)
+  }
   
   private let viewModel = TaskViewModel()
   private let tableView = UITableView()
@@ -38,7 +41,7 @@ extension TaskViewController {
         make.edges.equalToSuperview()
       }
       $0.backgroundColor = .white
-      $0.sectionHeaderHeight = 120
+      $0.sectionHeaderHeight = Metric.periodViewHeight
       $0.delegate = self
       $0.dataSource = self
       $0.register(cellType: UITableViewCell.self)
@@ -70,7 +73,9 @@ extension TaskViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    let cell = UITableViewCell()
+    cell.backgroundColor = .blue
+    return cell
   }
 }
 
@@ -82,43 +87,6 @@ extension TaskViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let headerView = PeriodView()
     headerView.configure(periodTypes[section])
-    headerView.collectionView.delegate = self
-    headerView.collectionView.dataSource = self
     return headerView
   }
-}
-
-extension TaskViewController: UICollectionViewDelegateFlowLayout {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeForItemAt indexPath: IndexPath)
-  -> CGSize {
-    return CGSize(width: Device.width - 32, height: 100)
-  }
-}
-
-extension TaskViewController: UICollectionViewDataSource {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    numberOfItemsInSection section: Int
-  ) -> Int {
-    return 10
-  }
-  
-  func collectionView(
-    _ collectionView: UICollectionView,
-    cellForItemAt indexPath: IndexPath
-  ) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: PeriodCell.className,
-            for: indexPath
-    ) as? PeriodCell else { fatalError() }
-    cell.configure(periodTypes[indexPath.section])
-    return cell
-  }
-}
-
-extension TaskViewController: UICollectionViewDelegate {
-  
 }

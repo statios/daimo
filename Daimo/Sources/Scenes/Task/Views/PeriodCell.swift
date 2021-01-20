@@ -15,12 +15,11 @@ final class PeriodCell: BaseCollectionViewCell {
 extension PeriodCell {
   override func setupUI() {
     super.setupUI()
-    
   }
 }
 
 extension PeriodCell {
-  func configure(_ item: PeriodType) {
-    
+  func configure(_ item: PeriodType?) {
+    self.backgroundColor = item?.color
   }
 }

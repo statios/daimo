@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import RxSwift
 
 class BaseView: UIView {
+  
+  var disposeBag = DisposeBag()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupUI()
+    setupBinding()
   }
   
   required init?(coder: NSCoder) {
@@ -18,6 +23,10 @@ class BaseView: UIView {
   }
   
   @objc dynamic func setupUI() {
+    
+  }
+  
+  @objc dynamic func setupBinding() {
     
   }
 }
