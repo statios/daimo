@@ -13,6 +13,7 @@ final class PeriodView: BaseView {
     static let titleHeight = CGFloat(20)
     static let titleBottomPadding = CGFloat(8)
     static let cellWidth = Device.width - 24 - 24
+    static let cellSpace = CGFloat(16)
     static let titleHeightWithPadding = titleTopPadding + titleHeight + titleBottomPadding
     static let cellHeight = TaskViewController.Metric.periodViewHeight - titleHeightWithPadding
   }
@@ -20,13 +21,12 @@ final class PeriodView: BaseView {
   private let viewModel = PeriodViewModel()
   
   private let titleLabel = UILabel()
-  let collectionView: UICollectionView = {
+  private let collectionView: BaseCollectionView = {
     let layout = UICollectionViewFlowLayout()
-    let cv = UICollectionView(
+    let cv = BaseCollectionView(
       frame: .zero,
       collectionViewLayout: layout
     )
-    layout.minimumInteritemSpacing = 0
     layout.minimumLineSpacing = 16
     layout.scrollDirection = .horizontal
     layout.itemSize.width = Metric.cellWidth
@@ -35,6 +35,8 @@ final class PeriodView: BaseView {
   }()
   
   private var periodType: PeriodType?
+  private var currentIndex: CGFloat = 0
+  private var isOneStepPaging = true
 }
 
 extension PeriodView {
@@ -64,8 +66,9 @@ extension PeriodView {
       }
       $0.delegate = self
       $0.dataSource = self
-      $0.isPagingEnabled = true
       $0.register(cellType: PeriodCell.self)
+      $0.isPagingEnabled = false
+      $0.decelerationRate = .fast
     }
   }
 }
@@ -88,13 +91,10 @@ extension PeriodView {
 }
 
 extension PeriodView: UICollectionViewDelegateFlowLayout {
-//  func collectionView(
-//    _ collectionView: UICollectionView,
-//    layout collectionViewLayout: UICollectionViewLayout,
-//    sizeForItemAt indexPath: IndexPath)
-//  -> CGSize {
-//    return CGSize(width: Device.width - 32, height: 100)
-//  }
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    let sideInset = (collectionView.frame.size.width - Metric.cellWidth) / 2
+    return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
+  }
 }
 
 extension PeriodView: UICollectionViewDataSource {
@@ -110,8 +110,8 @@ extension PeriodView: UICollectionViewDataSource {
     cellForItemAt indexPath: IndexPath
   ) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: PeriodCell.className,
-            for: indexPath
+      withReuseIdentifier: PeriodCell.className,
+      for: indexPath
     ) as? PeriodCell else { fatalError() }
     cell.configure(periodType)
     return cell
@@ -119,5 +119,44 @@ extension PeriodView: UICollectionViewDataSource {
 }
 
 extension PeriodView: UICollectionViewDelegate {
-  
+  func scrollViewWillEndDragging(
+    _ scrollView: UIScrollView,
+    withVelocity velocity: CGPoint,
+    targetContentOffset: UnsafeMutablePointer<CGPoint>
+  ) {
+    // item의 사이즈와 item 간의 간격 사이즈를 구해서 하나의 item 크기로 설정.
+    let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+    let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+    
+    // targetContentOff을 이용하여 x좌표가 얼마나 이동했는지 확인
+    // 이동한 x좌표 값과 item의 크기를 비교하여 몇 페이징이 될 것인지 값 설정
+    var offset = targetContentOffset.pointee
+    let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
+    var roundedIndex = round(index)
+    
+    // scrollView, targetContentOffset의 좌표 값으로 스크롤 방향을 알 수 있다.
+    // index를 반올림하여 사용하면 item의 절반 사이즈만큼 스크롤을 해야 페이징이 된다.
+    // 스크로로 방향을 체크하여 올림,내림을 사용하면 좀 더 자연스러운 페이징 효과를 낼 수 있다.
+    if scrollView.contentOffset.x > targetContentOffset.pointee.x {
+      roundedIndex = floor(index)
+    } else if scrollView.contentOffset.x < targetContentOffset.pointee.x {
+      roundedIndex = ceil(index)
+    } else {
+      roundedIndex = round(index)
+    }
+    
+    if isOneStepPaging {
+      if currentIndex > roundedIndex {
+        currentIndex -= 1
+        roundedIndex = currentIndex
+      } else if currentIndex < roundedIndex {
+        currentIndex += 1
+        roundedIndex = currentIndex
+      }
+    }
+    
+    // 위 코드를 통해 페이징 될 좌표값을 targetContentOffset에 대입하면 된다.
+    offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
+    targetContentOffset.pointee = offset
+  }
 }

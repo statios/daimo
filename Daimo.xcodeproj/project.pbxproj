@@ -26,6 +26,7 @@
 		F972D39725B8986400C4959C /* PeriodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D39625B8986400C4959C /* PeriodCell.swift */; };
 		F972D39C25B8988000C4959C /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D39B25B8988000C4959C /* BaseCollectionViewCell.swift */; };
 		F972D3A125B89EAA00C4959C /* PeriodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D3A025B89EAA00C4959C /* PeriodViewModel.swift */; };
+		F972D3DC25B9230A00C4959C /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D3DB25B9230A00C4959C /* BaseCollectionView.swift */; };
 		F9BB777825B7867900616024 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB777725B7867900616024 /* AppDelegate.swift */; };
 		F9BB778225B7867900616024 /* Daimo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9BB778025B7867900616024 /* Daimo.xcdatamodeld */; };
 		F9BB778425B7867A00616024 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BB778325B7867A00616024 /* Images.xcassets */; };
@@ -84,6 +85,7 @@
 		F972D39625B8986400C4959C /* PeriodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodCell.swift; sourceTree = "<group>"; };
 		F972D39B25B8988000C4959C /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		F972D3A025B89EAA00C4959C /* PeriodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodViewModel.swift; sourceTree = "<group>"; };
+		F972D3DB25B9230A00C4959C /* BaseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionView.swift; sourceTree = "<group>"; };
 		F9BB777425B7867900616024 /* Daimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Daimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9BB777725B7867900616024 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9BB778125B7867900616024 /* Daimo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Daimo.xcdatamodel; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				F9BB781525B78A1200616024 /* BaseViewModel.swift */,
 				F972D33F25B8536600C4959C /* BaseNavigationController.swift */,
 				F972D38725B85BD300C4959C /* BaseView.swift */,
+				F972D3DB25B9230A00C4959C /* BaseCollectionView.swift */,
 				F972D39B25B8988000C4959C /* BaseCollectionViewCell.swift */,
 			);
 			path = Bases;
@@ -565,6 +568,7 @@
 				F9BB777825B7867900616024 /* AppDelegate.swift in Sources */,
 				F9BB77FE25B789A800616024 /* SplashViewModel.swift in Sources */,
 				F972D39725B8986400C4959C /* PeriodCell.swift in Sources */,
+				F972D3DC25B9230A00C4959C /* BaseCollectionView.swift in Sources */,
 				F972D33825B8520200C4959C /* NSObject+.swift in Sources */,
 				F972D37825B85ABD00C4959C /* PeriodView.swift in Sources */,
 				F9C98C7425B78F860027AC60 /* TaskViewController.swift in Sources */,
