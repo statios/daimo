@@ -15,4 +15,5 @@ struct Color {
   static let lavenderPink = UIColor(red: 202.0 / 255.0, green: 155.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
   static let veryLightPink = UIColor(white: 235.0 / 255.0, alpha: 1.0)
   static let brownGrey = UIColor(white: 163.0 / 255.0, alpha: 1.0)
+  static let white = UIColor.white
 }

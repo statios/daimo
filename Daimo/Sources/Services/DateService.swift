@@ -9,6 +9,7 @@ import Foundation
 
 protocol DateServiceType {
   func fetchPeriodTypes() -> [PeriodType]
+//  func fetchDates(_ from: PeriodType) -> [Date]
 }
 
 class StubDateService: DateServiceType {

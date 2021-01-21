@@ -34,6 +34,7 @@ final class PeriodView: BaseView {
     return cv
   }()
   
+  private var items = [1, 2, 3, 4, 5]
   private var periodType: PeriodType?
   private var currentIndex: CGFloat = 0
   private var isOneStepPaging = true
@@ -91,7 +92,11 @@ extension PeriodView {
 }
 
 extension PeriodView: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+  func collectionView(
+    _ collectionView: UICollectionView,
+    layout collectionViewLayout: UICollectionViewLayout,
+    insetForSectionAt section: Int
+  ) -> UIEdgeInsets {
     let sideInset = (collectionView.frame.size.width - Metric.cellWidth) / 2
     return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
   }
@@ -102,7 +107,7 @@ extension PeriodView: UICollectionViewDataSource {
     _ collectionView: UICollectionView,
     numberOfItemsInSection section: Int
   ) -> Int {
-    return 10
+    return items.count
   }
   
   func collectionView(
@@ -114,6 +119,7 @@ extension PeriodView: UICollectionViewDataSource {
       for: indexPath
     ) as? PeriodCell else { fatalError() }
     cell.configure(periodType)
+    cell.dateLabel.text = String(items[indexPath.item])
     return cell
   }
 }
