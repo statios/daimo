@@ -33,4 +33,21 @@ extension PeriodType {
     case .yearly: return Color.lavenderPink
     }
   }
+  
+  var calendarComponents: Set<Calendar.Component> {
+    switch self {
+    case .daily: return [.year, .month, .day]
+    case .weekly: return [.year, .month, .day, .weekday]
+    case .monthly: return [.year, .month]
+    case .yearly: return [.year]
+    }
+  }
+  
+  var byAdding: Calendar.Component {
+    switch self {
+    case .daily, .weekly: return .day
+    case .monthly: return .month
+    case .yearly: return .month
+    }
+  }
 }

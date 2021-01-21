@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import InfiniteLayout
 
 final class PeriodView: BaseView {
   fileprivate struct Metric {
@@ -21,9 +23,9 @@ final class PeriodView: BaseView {
   private let viewModel = PeriodViewModel()
   
   private let titleLabel = UILabel()
-  private let collectionView: BaseCollectionView = {
-    let layout = UICollectionViewFlowLayout()
-    let cv = BaseCollectionView(
+  private let collectionView: InfiniteCollectionView = {
+    let layout = InfiniteLayout()
+    let cv = InfiniteCollectionView(
       frame: .zero,
       collectionViewLayout: layout
     )
@@ -34,10 +36,8 @@ final class PeriodView: BaseView {
     return cv
   }()
   
-  private var items = [1, 2, 3, 4, 5]
+  private var periodDates = [Date]()
   private var periodType: PeriodType?
-  private var currentIndex: CGFloat = 0
-  private var isOneStepPaging = true
 }
 
 extension PeriodView {
@@ -68,8 +68,8 @@ extension PeriodView {
       $0.delegate = self
       $0.dataSource = self
       $0.register(cellType: PeriodCell.self)
-      $0.isPagingEnabled = false
-      $0.decelerationRate = .fast
+      $0.isItemPagingEnabled = true
+      $0.infiniteDelegate = self
     }
   }
 }
@@ -77,10 +77,27 @@ extension PeriodView {
 extension PeriodView {
   override func setupBinding() {
     super.setupBinding()
+    // Event
+    
+    // State
     viewModel.state.displayTitle
       .asDriverOnErrorJustComplete()
       .drive(titleLabel.rx.text)
       .disposed(by: disposeBag)
+    
+    viewModel.state.displayItems
+      .asDriverOnErrorJustComplete()
+      .drive(onNext: { [weak self] in
+        self?.periodDates = $0
+        self?.collectionView.reloadData()
+      }).disposed(by: disposeBag)
+    
+    viewModel.state.updatePrefetchedDate
+      .debug()
+      .bind { [weak self] _ in
+        
+//        self?.periodDates[$0.index] = $0.date
+      }.disposed(by: disposeBag)
   }
 }
 
@@ -92,14 +109,13 @@ extension PeriodView {
 }
 
 extension PeriodView: UICollectionViewDelegateFlowLayout {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetForSectionAt section: Int
-  ) -> UIEdgeInsets {
-    let sideInset = (collectionView.frame.size.width - Metric.cellWidth) / 2
-    return UIEdgeInsets(top: 0, left: sideInset, bottom: 0, right: sideInset)
-  }
+    func collectionView(
+      _ collectionView: UICollectionView,
+      layout collectionViewLayout: UICollectionViewLayout,
+      insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
+      return UIEdgeInsets(top: 0, left: Metric.cellSpace, bottom: 0, right: 0)
+    }
 }
 
 extension PeriodView: UICollectionViewDataSource {
@@ -107,7 +123,7 @@ extension PeriodView: UICollectionViewDataSource {
     _ collectionView: UICollectionView,
     numberOfItemsInSection section: Int
   ) -> Int {
-    return items.count
+    return periodDates.count
   }
   
   func collectionView(
@@ -118,51 +134,29 @@ extension PeriodView: UICollectionViewDataSource {
       withReuseIdentifier: PeriodCell.className,
       for: indexPath
     ) as? PeriodCell else { fatalError() }
+    let infiniteIndexPath = self.collectionView.indexPath(from: indexPath)
     cell.configure(periodType)
-    cell.dateLabel.text = String(items[indexPath.item])
+    cell.dateLabel.text = periodDates[infiniteIndexPath.item].debugDescription
     return cell
   }
 }
 
-extension PeriodView: UICollectionViewDelegate {
-  func scrollViewWillEndDragging(
-    _ scrollView: UIScrollView,
-    withVelocity velocity: CGPoint,
-    targetContentOffset: UnsafeMutablePointer<CGPoint>
+extension PeriodView: InfiniteCollectionViewDelegate {
+  func infiniteCollectionView(
+    _ infiniteCollectionView: InfiniteCollectionView,
+    didChangeCenteredIndexPath from: IndexPath?,
+    to: IndexPath?
   ) {
-    // item의 사이즈와 item 간의 간격 사이즈를 구해서 하나의 item 크기로 설정.
-    let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-    let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
-    
-    // targetContentOff을 이용하여 x좌표가 얼마나 이동했는지 확인
-    // 이동한 x좌표 값과 item의 크기를 비교하여 몇 페이징이 될 것인지 값 설정
-    var offset = targetContentOffset.pointee
-    let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
-    var roundedIndex = round(index)
-    
-    // scrollView, targetContentOffset의 좌표 값으로 스크롤 방향을 알 수 있다.
-    // index를 반올림하여 사용하면 item의 절반 사이즈만큼 스크롤을 해야 페이징이 된다.
-    // 스크로로 방향을 체크하여 올림,내림을 사용하면 좀 더 자연스러운 페이징 효과를 낼 수 있다.
-    if scrollView.contentOffset.x > targetContentOffset.pointee.x {
-      roundedIndex = floor(index)
-    } else if scrollView.contentOffset.x < targetContentOffset.pointee.x {
-      roundedIndex = ceil(index)
-    } else {
-      roundedIndex = round(index)
-    }
-    
-    if isOneStepPaging {
-      if currentIndex > roundedIndex {
-        currentIndex -= 1
-        roundedIndex = currentIndex
-      } else if currentIndex < roundedIndex {
-        currentIndex += 1
-        roundedIndex = currentIndex
-      }
-    }
-    
-    // 위 코드를 통해 페이징 될 좌표값을 targetContentOffset에 대입하면 된다.
-    offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
-    targetContentOffset.pointee = offset
+    guard let from = from,
+          let to = to else { return }
+    let before = infiniteCollectionView.indexPath(from: from).item
+    let after = infiniteCollectionView.indexPath(from: to).item
+    let direction = after > before ? 1 : -1
+    let request = DatePrefetch.Request(
+      direction: direction,
+      index: after,
+      date: periodDates[after]
+    )
+    viewModel.event.requestDatePrefetch.accept(request)
   }
 }

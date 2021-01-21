@@ -11,5 +11,6 @@ extension Resolver: ResolverRegistering {
   public static func registerAllServices() {
     register { StubDateService() }
       .implements(DateServiceType.self)
+      .scope(.shared)
   }
 }

@@ -25,6 +25,11 @@ extension PeriodCell {
       $0.textColor = Color.white
     }
   }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    dateLabel.text = nil
+  }
 }
 
 extension PeriodCell {
