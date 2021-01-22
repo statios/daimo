@@ -13,10 +13,12 @@ import Resolver
 final class PeriodViewModel: BaseViewModel {
   
   @Injected var dateService: DateServiceType
+//  @Injected var coreDataService: 
   
   struct Event {
     let onConfigure = PublishRelay<PeriodType>()
     let requestDatePrefetch = PublishRelay<DatePrefetch.Request>()
+    let didSelectCell = PublishRelay<IndexPath>()
   }
   
   struct State {

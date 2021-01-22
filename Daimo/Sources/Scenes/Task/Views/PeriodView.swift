@@ -136,6 +136,13 @@ extension PeriodView: UICollectionViewDataSource {
     cell.configure(periodType, date: periodDates[infiniteIndexPath.item])
     return cell
   }
+  
+  func collectionView(
+    _ collectionView: UICollectionView,
+    didSelectItemAt indexPath: IndexPath
+  ) {
+    viewModel.event.didSelectCell.accept(indexPath)
+  }
 }
 
 extension PeriodView: InfiniteCollectionViewDelegate {
