@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		F915C71325BAB65A00B13AAD /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F915C71225BAB65A00B13AAD /* Realm */; };
 		F915C71525BAB65A00B13AAD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F915C71425BAB65A00B13AAD /* RealmSwift */; };
+		F915C72D25BAC46100B13AAD /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F915C72925BAC46100B13AAD /* PINRemoteImage.framework */; };
+		F915C72E25BAC46100B13AAD /* PINOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F915C72A25BAC46100B13AAD /* PINOperation.framework */; };
+		F915C72F25BAC46100B13AAD /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F915C72B25BAC46100B13AAD /* AsyncDisplayKit.framework */; };
+		F915C73025BAC46100B13AAD /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F915C72C25BAC46100B13AAD /* PINCache.framework */; };
+		F915C73925BAC4E100B13AAD /* BaseASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F915C73825BAC4E100B13AAD /* BaseASViewController.swift */; };
 		F972D32125B81CC200C4959C /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32025B81CC200C4959C /* DateService.swift */; };
 		F972D32A25B8508D00C4959C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32925B8508D00C4959C /* UIView+.swift */; };
 		F972D33225B851C100C4959C /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D33125B851C100C4959C /* UITableView+.swift */; };
@@ -77,6 +82,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F915C72925BAC46100B13AAD /* PINRemoteImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINRemoteImage.framework; path = Carthage/Build/iOS/PINRemoteImage.framework; sourceTree = "<group>"; };
+		F915C72A25BAC46100B13AAD /* PINOperation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINOperation.framework; path = Carthage/Build/iOS/PINOperation.framework; sourceTree = "<group>"; };
+		F915C72B25BAC46100B13AAD /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = Carthage/Build/iOS/AsyncDisplayKit.framework; sourceTree = "<group>"; };
+		F915C72C25BAC46100B13AAD /* PINCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINCache.framework; path = Carthage/Build/iOS/PINCache.framework; sourceTree = "<group>"; };
+		F915C73825BAC4E100B13AAD /* BaseASViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseASViewController.swift; sourceTree = "<group>"; };
 		F972D32025B81CC200C4959C /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		F972D32925B8508D00C4959C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		F972D33125B851C100C4959C /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
@@ -140,6 +150,10 @@
 				F9BB77D525B787F200616024 /* SnapKit in Frameworks */,
 				F915C71325BAB65A00B13AAD /* Realm in Frameworks */,
 				F972D3E225B9A68F00C4959C /* InfiniteLayout in Frameworks */,
+				F915C72D25BAC46100B13AAD /* PINRemoteImage.framework in Frameworks */,
+				F915C72E25BAC46100B13AAD /* PINOperation.framework in Frameworks */,
+				F915C72F25BAC46100B13AAD /* AsyncDisplayKit.framework in Frameworks */,
+				F915C73025BAC46100B13AAD /* PINCache.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +174,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F915C72825BAC46100B13AAD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F915C72B25BAC46100B13AAD /* AsyncDisplayKit.framework */,
+				F915C72C25BAC46100B13AAD /* PINCache.framework */,
+				F915C72A25BAC46100B13AAD /* PINOperation.framework */,
+				F915C72925BAC46100B13AAD /* PINRemoteImage.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F972D31F25B81CA700C4959C /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +266,7 @@
 				F9BB779025B7867A00616024 /* DaimoTests */,
 				F9BB779B25B7867A00616024 /* DaimoUITests */,
 				F9BB777525B7867900616024 /* Products */,
+				F915C72825BAC46100B13AAD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -404,6 +430,7 @@
 				F972D39B25B8988000C4959C /* BaseCollectionViewCell.swift */,
 				F972D45925BAABD700C4959C /* BaseTableView.swift */,
 				F972D45425BAAAA300C4959C /* BaseTableViewCell.swift */,
+				F915C73825BAC4E100B13AAD /* BaseASViewController.swift */,
 			);
 			path = Bases;
 			sourceTree = "<group>";
@@ -447,6 +474,7 @@
 				F9BB777025B7867900616024 /* Sources */,
 				F9BB777125B7867900616024 /* Frameworks */,
 				F9BB777225B7867900616024 /* Resources */,
+				F915C73425BAC47000B13AAD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -582,6 +610,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F915C73425BAC47000B13AAD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/AsyncDisplayKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PINCache.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PINOperation.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PINRemoteImage.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F9BB777025B7867900616024 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -622,6 +674,7 @@
 				F972D32A25B8508D00C4959C /* UIView+.swift in Sources */,
 				F9C98C6625B78E690027AC60 /* UIViewController+Rx.swift in Sources */,
 				F9BB781125B78A0E00616024 /* BaseViewController.swift in Sources */,
+				F915C73925BAC4E100B13AAD /* BaseASViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -793,6 +846,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4YL8LS5ZJC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Daimo/Supportings/plists/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -813,6 +870,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4YL8LS5ZJC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Daimo/Supportings/plists/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
