@@ -29,6 +29,7 @@
 		F972D3DC25B9230A00C4959C /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D3DB25B9230A00C4959C /* BaseCollectionView.swift */; };
 		F972D3E225B9A68F00C4959C /* InfiniteLayout in Frameworks */ = {isa = PBXBuildFile; productRef = F972D3E125B9A68F00C4959C /* InfiniteLayout */; };
 		F972D40425B9B7F100C4959C /* DatePrefetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D40325B9B7F100C4959C /* DatePrefetch.swift */; };
+		F972D41825BA63DC00C4959C /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D41725BA63DC00C4959C /* Date+.swift */; };
 		F9BB777825B7867900616024 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB777725B7867900616024 /* AppDelegate.swift */; };
 		F9BB778225B7867900616024 /* Daimo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9BB778025B7867900616024 /* Daimo.xcdatamodeld */; };
 		F9BB778425B7867A00616024 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BB778325B7867A00616024 /* Images.xcassets */; };
@@ -89,6 +90,7 @@
 		F972D3A025B89EAA00C4959C /* PeriodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodViewModel.swift; sourceTree = "<group>"; };
 		F972D3DB25B9230A00C4959C /* BaseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionView.swift; sourceTree = "<group>"; };
 		F972D40325B9B7F100C4959C /* DatePrefetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePrefetch.swift; sourceTree = "<group>"; };
+		F972D41725BA63DC00C4959C /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		F9BB777425B7867900616024 /* Daimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Daimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9BB777725B7867900616024 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9BB778125B7867900616024 /* Daimo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Daimo.xcdatamodel; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				F972D33725B8520200C4959C /* NSObject+.swift */,
+				F972D41725BA63DC00C4959C /* Date+.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				F9BB77F625B789A200616024 /* SplashViewController.swift in Sources */,
 				F9BB778225B7867900616024 /* Daimo.xcdatamodeld in Sources */,
 				F972D36F25B85A0200C4959C /* Font.swift in Sources */,
+				F972D41825BA63DC00C4959C /* Date+.swift in Sources */,
 				F972D33225B851C100C4959C /* UITableView+.swift in Sources */,
 				F972D35725B854DC00C4959C /* AppDelegate+Inject.swift in Sources */,
 				F972D32125B81CC200C4959C /* DateService.swift in Sources */,

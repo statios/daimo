@@ -9,12 +9,16 @@ import Foundation
 import UIKit
 
 final class PeriodCell: BaseCollectionViewCell {
-  let dateLabel = UILabel() // TODO access control
+  private let dateLabel = UILabel()
 }
 
 extension PeriodCell {
   override func setupUI() {
     super.setupUI()
+    
+    contentView.do {
+      $0.layer.cornerRadius = 12
+    }
     dateLabel.do {
       $0.add(to: contentView)
       $0.snp.makeConstraints { (make) in
@@ -34,8 +38,17 @@ extension PeriodCell {
 
 extension PeriodCell {
   func configure(
-    _ item: PeriodType?
+    _ item: PeriodType?,
+    date: Date
   ) {
-    contentView.backgroundColor = item?.color
+    guard let period = item else { return }
+    contentView.backgroundColor = period.color
+    dateLabel.text = date.dateFormat(period.dateFormat)
+    if period == .weekly {
+      let extraDate = Calendar.current.date(byAdding: .day, value: 7, to: date)
+      let dateFormat = period.dateFormat + ", yyyy"
+      let extraDateString = extraDate!.dateFormat(dateFormat)
+      dateLabel.text! += " - " + extraDateString //TODO remove force unwrap
+    }
   }
 }

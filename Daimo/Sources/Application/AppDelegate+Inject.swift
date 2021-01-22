@@ -9,7 +9,7 @@ import Resolver
 
 extension Resolver: ResolverRegistering {
   public static func registerAllServices() {
-    register { StubDateService() }
+    register { DateService() }
       .implements(DateServiceType.self)
       .scope(.shared)
   }

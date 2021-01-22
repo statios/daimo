@@ -47,7 +47,16 @@ extension PeriodType {
     switch self {
     case .daily, .weekly: return .day
     case .monthly: return .month
-    case .yearly: return .month
+    case .yearly: return .year
+    }
+  }
+  
+  var dateFormat: String {
+    switch self {
+    case .daily: return "EEEE, MMMd yyyy"
+    case .weekly: return "EE, MMMd"
+    case .monthly: return "MMMM, yyyy"
+    case .yearly: return "yyyy"
     }
   }
 }

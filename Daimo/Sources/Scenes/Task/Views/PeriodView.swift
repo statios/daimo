@@ -15,7 +15,7 @@ final class PeriodView: BaseView {
     static let titleHeight = CGFloat(20)
     static let titleBottomPadding = CGFloat(8)
     static let cellWidth = Device.width - 24 - 24
-    static let cellSpace = CGFloat(16)
+    static let cellSpace = CGFloat(8)
     static let titleHeightWithPadding = titleTopPadding + titleHeight + titleBottomPadding
     static let cellHeight = TaskViewController.Metric.periodViewHeight - titleHeightWithPadding
   }
@@ -29,7 +29,7 @@ final class PeriodView: BaseView {
       frame: .zero,
       collectionViewLayout: layout
     )
-    layout.minimumLineSpacing = 16
+    layout.minimumLineSpacing = Metric.cellSpace
     layout.scrollDirection = .horizontal
     layout.itemSize.width = Metric.cellWidth
     layout.itemSize.height = Metric.cellHeight
@@ -43,7 +43,7 @@ final class PeriodView: BaseView {
 extension PeriodView {
   override func setupUI() {
     super.setupUI()
-    self.backgroundColor = .brown
+    self.backgroundColor = .white
     
     titleLabel.do {
       $0.add(to: self)
@@ -54,7 +54,6 @@ extension PeriodView {
       }
       $0.font = Font.champagneBold.withSize(16)
       $0.textColor = Color.greyishBrown
-      $0.backgroundColor = .red
     }
     
     collectionView.do {
@@ -70,6 +69,7 @@ extension PeriodView {
       $0.register(cellType: PeriodCell.self)
       $0.isItemPagingEnabled = true
       $0.infiniteDelegate = self
+      $0.backgroundColor = .white
     }
   }
 }
@@ -93,10 +93,8 @@ extension PeriodView {
       }).disposed(by: disposeBag)
     
     viewModel.state.updatePrefetchedDate
-      .debug()
-      .bind { [weak self] _ in
-        
-//        self?.periodDates[$0.index] = $0.date
+      .bind { [weak self] in
+        self?.periodDates[$0.index] = $0.date
       }.disposed(by: disposeBag)
   }
 }
@@ -135,8 +133,7 @@ extension PeriodView: UICollectionViewDataSource {
       for: indexPath
     ) as? PeriodCell else { fatalError() }
     let infiniteIndexPath = self.collectionView.indexPath(from: indexPath)
-    cell.configure(periodType)
-    cell.dateLabel.text = periodDates[infiniteIndexPath.item].debugDescription
+    cell.configure(periodType, date: periodDates[infiniteIndexPath.item])
     return cell
   }
 }
@@ -149,13 +146,13 @@ extension PeriodView: InfiniteCollectionViewDelegate {
   ) {
     guard let from = from,
           let to = to else { return }
-    let before = infiniteCollectionView.indexPath(from: from).item
     let after = infiniteCollectionView.indexPath(from: to).item
-    let direction = after > before ? 1 : -1
+    let direction = to.item - from.item == 1 ? 1 : -1
+    let date = periodDates[after]
     let request = DatePrefetch.Request(
       direction: direction,
       index: after,
-      date: periodDates[after]
+      date: date
     )
     viewModel.event.requestDatePrefetch.accept(request)
   }

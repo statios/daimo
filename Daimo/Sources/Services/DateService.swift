@@ -14,7 +14,7 @@ protocol DateServiceType {
   func prefetchDate(_ type: PeriodType, direction: Int, date: Date) -> Date
 }
 
-class StubDateService: DateServiceType {
+class DateService: DateServiceType {
   func fetchPeriodTypes() -> [PeriodType] {
     return PeriodType.allCases
   }
@@ -27,18 +27,23 @@ class StubDateService: DateServiceType {
       let addedDate = Calendar.current.date(byAdding: .day, value: -(weekday - 1), to: date) ?? Date()
       return addedDate
     }
+    
     return Calendar.current.date(from: components) ?? Date()
   }
   
   func fetchTodays(_ type: PeriodType) -> [Date] {
-    return [0, 1, 2, 3, -3, -2, -1].compactMap { Calendar.current.date(byAdding: type.byAdding, value: $0, to: fetchToday(type)) }
+    return [0, 1, 2, 3, -3, -2, -1].compactMap {
+      if type == .weekly {
+        return Calendar.current.date(byAdding: type.byAdding, value: $0 * 7, to: fetchToday(type))
+      }
+      return Calendar.current.date(byAdding: type.byAdding, value: $0, to: fetchToday(type))
+    }
   }
   
   func prefetchDate(_ type: PeriodType, direction: Int, date: Date) -> Date {
-    Calendar.current.date(byAdding: type.byAdding, value: direction * 3, to: date) ?? Date()
+    if type == .weekly {
+      return Calendar.current.date(byAdding: type.byAdding, value: (direction * 3) * 7, to: date) ?? Date()
+    }
+    return Calendar.current.date(byAdding: type.byAdding, value: direction * 3, to: date) ?? Date()
   }
 }
-
-//class DateService: DateServiceType {
-//  
-//}
