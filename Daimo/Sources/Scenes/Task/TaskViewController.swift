@@ -46,6 +46,8 @@ extension TaskViewController {
       $0.delegate = self
       $0.dataSource = self
       $0.register(cellType: TaskCell.self)
+      $0.rowHeight = 4 + 44 + 4
+      $0.estimatedRowHeight = 4 + 44 + 4
     }
   }
 }
@@ -75,8 +77,8 @@ extension TaskViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: TaskCell.className,
-            for: indexPath
+      withIdentifier: TaskCell.className,
+      for: indexPath
     ) as? TaskCell else { fatalError() }
     let task = tasks.filter { $0.periodType == periodTypes[indexPath.section].rawValue }[indexPath.row]
     cell.configure(task)
@@ -103,11 +105,12 @@ extension TaskViewController: PeriodViewDelegate {
     task.periodType = type.rawValue
     tasks.insert(task, at: 0)
     let indexPath = IndexPath(item: 0, section: type.rawValue)
-//    tableView.isUserInteractionEnabled = false
+    //    tableView.isUserInteractionEnabled = false
     
-    DispatchQueue.main.async { [weak self] in
-      self?.tableView.insertRows(at: [indexPath], with: .fade)
-      self?.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-    }
+    tableView.beginUpdates()
+    tableView.insertRows(at: [indexPath], with: .none)
+    tableView.endUpdates()
+//    tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+    
   }
 }

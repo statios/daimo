@@ -22,8 +22,8 @@ class BaseTableView: UITableView {
   }
   
   @objc dynamic func setupUI() {
-    rowHeight = UITableView.automaticDimension
-    estimatedRowHeight = 54
+//    rowHeight = UITableView.automaticDimension
+//    estimatedRowHeight = 54
     separatorStyle = .none
   }
 }

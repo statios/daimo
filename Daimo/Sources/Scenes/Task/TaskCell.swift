@@ -26,7 +26,7 @@ extension TaskCell {
         make.leading.equalToSuperview().offset(4)
         make.top.equalToSuperview().offset(4)
         make.bottom.equalToSuperview().offset(-4)
-        make.width.height.equalTo(44)
+        make.width.equalTo(44)
       }
       $0.backgroundColor = .red
     }
@@ -45,10 +45,11 @@ extension TaskCell {
 
 extension TaskCell {
   func configure(_ task: Task) {
+    textField.isUserInteractionEnabled = false //TODO remove
     if task.content == "" {
-//      DispatchQueue.main.async { [weak self] in
-//        self?.textField.becomeFirstResponder()
-//      }
+      DispatchQueue.main.async { [weak self] in
+        self?.textField.becomeFirstResponder()
+      }
     } else {
       textField.isUserInteractionEnabled = false
     }
