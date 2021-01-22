@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-enum PeriodType: CaseIterable {
-  case daily
-  case weekly
-  case monthly
-  case yearly
+enum PeriodType: Int, CaseIterable {
+  case daily = 0
+  case weekly = 1
+  case monthly = 2
+  case yearly = 3
 }
 
 extension PeriodType {

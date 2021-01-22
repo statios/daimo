@@ -9,16 +9,17 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Resolver
+import CoreData
 
 final class PeriodViewModel: BaseViewModel {
   
   @Injected var dateService: DateServiceType
-//  @Injected var coreDataService: 
+  @Injected var coreDataService: CoreDataServiceType
   
   struct Event {
     let onConfigure = PublishRelay<PeriodType>()
     let requestDatePrefetch = PublishRelay<DatePrefetch.Request>()
-    let didSelectCell = PublishRelay<IndexPath>()
+    let didSelectDate = PublishRelay<Date>()
   }
   
   struct State {
@@ -53,6 +54,16 @@ extension PeriodViewModel {
         return response
       }.bind(to: state.updatePrefetchedDate)
       .disposed(by: disposeBag)
+    
+//    event.didSelectDate
+//      .subscribe(onNext: { _ in
+//        
+//      }).disposed(by: disposeBag)
+//      .withLatestFrom(event.onConfigure) { [weak self] _, _ in
+//        let request: NSFetchRequest<Task> = Task.fetchRequest()
+//        let tasks = coreDataService.fetch(request: request)
+//        Log.verbose(tasks)
+//      }
   }
 }
 

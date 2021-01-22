@@ -14,9 +14,10 @@ final class TaskViewController: BaseViewController {
   }
   
   private let viewModel = TaskViewModel()
-  private let tableView = UITableView()
+  private let tableView = BaseTableView()
   
   private var periodTypes = [PeriodType]()
+  private var tasks = [Task]()
 }
 
 extension TaskViewController {
@@ -44,7 +45,7 @@ extension TaskViewController {
       $0.sectionHeaderHeight = Metric.periodViewHeight
       $0.delegate = self
       $0.dataSource = self
-      $0.register(cellType: UITableViewCell.self)
+      $0.register(cellType: TaskCell.self)
     }
   }
 }
@@ -69,12 +70,16 @@ extension TaskViewController {
 
 extension TaskViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    return tasks.filter { $0.periodType == periodTypes[section].rawValue }.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = UITableViewCell()
-    cell.backgroundColor = .blue
+    guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: TaskCell.className,
+            for: indexPath
+    ) as? TaskCell else { fatalError() }
+    let task = tasks.filter { $0.periodType == periodTypes[indexPath.section].rawValue }[indexPath.row]
+    cell.configure(task)
     return cell
   }
 }
@@ -87,6 +92,13 @@ extension TaskViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let headerView = PeriodView()
     headerView.configure(periodTypes[section])
+    headerView.delegate = self
     return headerView
+  }
+}
+
+extension TaskViewController: PeriodViewDelegate {
+  func didSelectPeriod(_ type: PeriodType, date: Date) {
+    tasks.insert(<#T##newElement: Task##Task#>, at: <#T##Int#>)
   }
 }

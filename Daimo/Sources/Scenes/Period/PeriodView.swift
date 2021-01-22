@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import InfiniteLayout
 
+protocol PeriodViewDelegate: class {
+  func didSelectPeriod(_ type: PeriodType, date: Date)
+}
+
 final class PeriodView: BaseView {
   fileprivate struct Metric {
     static let titleTopPadding = CGFloat(16)
@@ -36,6 +40,7 @@ final class PeriodView: BaseView {
     return cv
   }()
   
+  weak var delegate: PeriodViewDelegate?
   private var periodDates = [Date]()
   private var periodType: PeriodType?
 }
@@ -141,7 +146,10 @@ extension PeriodView: UICollectionViewDataSource {
     _ collectionView: UICollectionView,
     didSelectItemAt indexPath: IndexPath
   ) {
-    viewModel.event.didSelectCell.accept(indexPath)
+    let infiniteIndexPath = self.collectionView.indexPath(from: indexPath)
+    let selectedDate = periodDates[infiniteIndexPath.item]
+    viewModel.event.didSelectDate.accept(selectedDate)
+    if let type = periodType { delegate?.didSelectPeriod(type, date: selectedDate) }
   }
 }
 

@@ -12,5 +12,8 @@ extension Resolver: ResolverRegistering {
     register { DateService() }
       .implements(DateServiceType.self)
       .scope(.shared)
+    register { CoreDataService() }
+      .implements(CoreDataServiceType.self)
+      .scope(.shared)
   }
 }
