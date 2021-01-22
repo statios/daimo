@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F915C71325BAB65A00B13AAD /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F915C71225BAB65A00B13AAD /* Realm */; };
+		F915C71525BAB65A00B13AAD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F915C71425BAB65A00B13AAD /* RealmSwift */; };
 		F972D32125B81CC200C4959C /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32025B81CC200C4959C /* DateService.swift */; };
 		F972D32A25B8508D00C4959C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32925B8508D00C4959C /* UIView+.swift */; };
 		F972D33225B851C100C4959C /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D33125B851C100C4959C /* UITableView+.swift */; };
@@ -132,9 +134,11 @@
 				F972D35225B854CA00C4959C /* Resolver in Frameworks */,
 				F9BB77CD25B787D200616024 /* RxCocoa in Frameworks */,
 				F9BB77CB25B787D200616024 /* RxRelay in Frameworks */,
+				F915C71525BAB65A00B13AAD /* RealmSwift in Frameworks */,
 				F9BB77CF25B787D200616024 /* RxSwift in Frameworks */,
 				F9BB77C525B787B000616024 /* Then in Frameworks */,
 				F9BB77D525B787F200616024 /* SnapKit in Frameworks */,
+				F915C71325BAB65A00B13AAD /* Realm in Frameworks */,
 				F972D3E225B9A68F00C4959C /* InfiniteLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +461,8 @@
 				F9BB77D425B787F200616024 /* SnapKit */,
 				F972D35125B854CA00C4959C /* Resolver */,
 				F972D3E125B9A68F00C4959C /* InfiniteLayout */,
+				F915C71225BAB65A00B13AAD /* Realm */,
+				F915C71425BAB65A00B13AAD /* RealmSwift */,
 			);
 			productName = Daimo;
 			productReference = F9BB777425B7867900616024 /* Daimo.app */;
@@ -535,6 +541,7 @@
 				F9BB77D325B787F200616024 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				F972D35025B854CA00C4959C /* XCRemoteSwiftPackageReference "Resolver" */,
 				F972D3E025B9A68E00C4959C /* XCRemoteSwiftPackageReference "InfiniteLayout" */,
+				F915C71125BAB65A00B13AAD /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = F9BB777525B7867900616024 /* Products */;
 			projectDirPath = "";
@@ -945,6 +952,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F915C71125BAB65A00B13AAD /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.5.1;
+			};
+		};
 		F972D35025B854CA00C4959C /* XCRemoteSwiftPackageReference "Resolver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Resolver";
@@ -988,6 +1003,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F915C71225BAB65A00B13AAD /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F915C71125BAB65A00B13AAD /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		F915C71425BAB65A00B13AAD /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F915C71125BAB65A00B13AAD /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
 		F972D35125B854CA00C4959C /* Resolver */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F972D35025B854CA00C4959C /* XCRemoteSwiftPackageReference "Resolver" */;

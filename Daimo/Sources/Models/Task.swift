@@ -8,25 +8,33 @@
 
 import Foundation
 import CoreData
+import RealmSwift
 
-@objc(Task)
-public class Task: NSManagedObject {
+//@objc(Task)
+//public class Task: NSManagedObject {
+//
+//}
+//
+//extension Task {
+//
+//  @nonobjc public class func fetchRequest() -> NSFetchRequest<Task> {
+//    return NSFetchRequest<Task>(entityName: "Task")
+//  }
+//
+//  @NSManaged public var content: String?
+//  @NSManaged public var periodType: Int16
+//  @NSManaged public var isDone: Bool
+//  @NSManaged public var date: Date?
+//
+//}
+//
+//extension Task: Identifiable {
+//
+//}
 
-}
-
-extension Task {
-
-  @nonobjc public class func fetchRequest() -> NSFetchRequest<Task> {
-    return NSFetchRequest<Task>(entityName: "Task")
-  }
-
-  @NSManaged public var content: String?
-  @NSManaged public var periodType: Int16
-  @NSManaged public var isDone: Bool
-  @NSManaged public var date: Date?
-
-}
-
-extension Task: Identifiable {
-
+class Task: Object {
+  @objc dynamic var content: String = ""
+  @objc dynamic var periodType: Int = 0
+  @objc dynamic var isDone: Bool = false
+  @objc dynamic var date: Date = Date()
 }

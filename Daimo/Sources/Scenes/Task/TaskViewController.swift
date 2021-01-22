@@ -99,6 +99,15 @@ extension TaskViewController: UITableViewDelegate {
 
 extension TaskViewController: PeriodViewDelegate {
   func didSelectPeriod(_ type: PeriodType, date: Date) {
-    tasks.insert(<#T##newElement: Task##Task#>, at: <#T##Int#>)
+    let task = Task()
+    task.periodType = type.rawValue
+    tasks.insert(task, at: 0)
+    let indexPath = IndexPath(item: 0, section: type.rawValue)
+//    tableView.isUserInteractionEnabled = false
+    
+    DispatchQueue.main.async { [weak self] in
+      self?.tableView.insertRows(at: [indexPath], with: .fade)
+      self?.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+    }
   }
 }

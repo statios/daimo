@@ -44,7 +44,13 @@ extension TaskCell {
 }
 
 extension TaskCell {
-  func configure(_ task: Task?) {
-    
+  func configure(_ task: Task) {
+    if task.content == "" {
+//      DispatchQueue.main.async { [weak self] in
+//        self?.textField.becomeFirstResponder()
+//      }
+    } else {
+      textField.isUserInteractionEnabled = false
+    }
   }
 }
