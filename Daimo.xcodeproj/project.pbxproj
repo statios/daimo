@@ -18,6 +18,8 @@
 		F915C74325BAC8DA00B13AAD /* BaseCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F915C74225BAC8DA00B13AAD /* BaseCellNode.swift */; };
 		F969AC4725BC2CAC0065A4ED /* TextFieldNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC4625BC2CAC0065A4ED /* TextFieldNode.swift */; };
 		F969AC5825BC3A140065A4ED /* KeyboardLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC5725BC3A140065A4ED /* KeyboardLayoutGuide.swift */; };
+		F969AC6025BC5C690065A4ED /* RxKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC5F25BC5C690065A4ED /* RxKeyboard.swift */; };
+		F969AC6625BC8C6D0065A4ED /* TaskInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC6525BC8C6D0065A4ED /* TaskInputView.swift */; };
 		F972D32125B81CC200C4959C /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32025B81CC200C4959C /* DateService.swift */; };
 		F972D32A25B8508D00C4959C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32925B8508D00C4959C /* UIView+.swift */; };
 		F972D33225B851C100C4959C /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D33125B851C100C4959C /* UITableView+.swift */; };
@@ -95,6 +97,8 @@
 		F915C74225BAC8DA00B13AAD /* BaseCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellNode.swift; sourceTree = "<group>"; };
 		F969AC4625BC2CAC0065A4ED /* TextFieldNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldNode.swift; sourceTree = "<group>"; };
 		F969AC5725BC3A140065A4ED /* KeyboardLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutGuide.swift; sourceTree = "<group>"; };
+		F969AC5F25BC5C690065A4ED /* RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxKeyboard.swift; sourceTree = "<group>"; };
+		F969AC6525BC8C6D0065A4ED /* TaskInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInputView.swift; sourceTree = "<group>"; };
 		F972D32025B81CC200C4959C /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		F972D32925B8508D00C4959C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		F972D33125B851C100C4959C /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
@@ -199,6 +203,14 @@
 				F969AC4625BC2CAC0065A4ED /* TextFieldNode.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		F969AC6425BC8C630065A4ED /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				F969AC6525BC8C6D0065A4ED /* TaskInputView.swift */,
+			);
+			path = Nodes;
 			sourceTree = "<group>";
 		};
 		F972D31F25B81CA700C4959C /* Services */ = {
@@ -432,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				F9BB780525B789DC00616024 /* Log.swift */,
+				F969AC5F25BC5C690065A4ED /* RxKeyboard.swift */,
 				F969AC5725BC3A140065A4ED /* KeyboardLayoutGuide.swift */,
 			);
 			path = Utils;
@@ -480,6 +493,7 @@
 				F9C98C7325B78F860027AC60 /* TaskViewController.swift */,
 				F9C98C7B25B78F8B0027AC60 /* TaskViewModel.swift */,
 				F972D44F25BAAA7700C4959C /* TaskCell.swift */,
+				F969AC6425BC8C630065A4ED /* Nodes */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -667,6 +681,7 @@
 				F9BB77F625B789A200616024 /* SplashViewController.swift in Sources */,
 				F9BB778225B7867900616024 /* Daimo.xcdatamodeld in Sources */,
 				F972D36F25B85A0200C4959C /* Font.swift in Sources */,
+				F969AC6625BC8C6D0065A4ED /* TaskInputView.swift in Sources */,
 				F972D45025BAAA7700C4959C /* TaskCell.swift in Sources */,
 				F972D41825BA63DC00C4959C /* Date+.swift in Sources */,
 				F972D33225B851C100C4959C /* UITableView+.swift in Sources */,
@@ -692,6 +707,7 @@
 				F972D33825B8520200C4959C /* NSObject+.swift in Sources */,
 				F969AC4725BC2CAC0065A4ED /* TextFieldNode.swift in Sources */,
 				F972D45A25BAABD700C4959C /* BaseTableView.swift in Sources */,
+				F969AC6025BC5C690065A4ED /* RxKeyboard.swift in Sources */,
 				F972D37825B85ABD00C4959C /* PeriodView.swift in Sources */,
 				F9C98C7425B78F860027AC60 /* TaskViewController.swift in Sources */,
 				F972D32A25B8508D00C4959C /* UIView+.swift in Sources */,

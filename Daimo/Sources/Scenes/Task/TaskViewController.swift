@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import AsyncDisplayKit
 import Resolver
+import RxSwift
 
 final class TaskViewController: BaseASViewController {
   struct Metric {
@@ -18,9 +19,18 @@ final class TaskViewController: BaseASViewController {
   @Injected var viewModel: TaskViewModel
   
   private let tableNode = ASTableNode()
+  private let taskInputView = TaskInputView()
   
   private var periodTypes = [PeriodType]()
   private var tasks = [Task]()
+  
+  override var inputAccessoryView: UIView? {
+    return taskInputView
+  }
+  
+  override var canBecomeFirstResponder: Bool {
+    return true
+  }
 }
 
 extension TaskViewController {
@@ -29,6 +39,15 @@ extension TaskViewController {
     self.do {
       $0.modalPresentationStyle = .overFullScreen
     }
+  }
+}
+
+extension TaskViewController {
+  override func layoutSpec(node: ASDisplayNode, size: ASSizeRange) -> ASLayoutSpec {
+    return ASInsetLayoutSpec(
+      insets: .zero,
+      child: tableNode
+    )
   }
 }
 
@@ -45,13 +64,6 @@ extension TaskViewController {
       $0.dataSource = self
       $0.view.sectionHeaderHeight = Metric.periodViewHeight
       $0.view.separatorStyle = .none
-      $0.view.add(to: view)
-      $0.view.snp.makeConstraints { (make) in
-        make.leading.equalToSuperview()
-        make.trailing.equalToSuperview()
-        make.top.equalToSuperview()
-        make.bottom.equalTo(view.keyboardLayoutGuideNoSafeArea.snp.top)
-      }
       $0.view.keyboardDismissMode = .onDrag
     }
   }
@@ -72,6 +84,17 @@ extension TaskViewController {
         self?.periodTypes = $0
         self?.tableNode.reloadData()
       }).disposed(by: disposeBag)
+    
+    RxKeyboard.instance.visibleHeight
+      .drive(onNext: { [weak self] in
+        self?.tableNode.contentInset.bottom = $0
+      }).disposed(by: disposeBag)
+    
+    Observable.merge(
+      taskInputView.textField.rx.controlEvent(.editingDidBegin).map { false },
+      taskInputView.textField.rx.controlEvent(.editingDidEnd).map { true }
+    ).bind(to: taskInputView.rx.isHidden)
+    .disposed(by: disposeBag)
   }
 }
 
@@ -107,20 +130,8 @@ extension TaskViewController: ASTableDelegate {
 
 extension TaskViewController: PeriodViewDelegate {
   func didSelectPeriod(_ type: PeriodType, date: Date) {
-    let task = Task()
-    task.periodType = type.rawValue
-    tasks.insert(task, at: 0)
-    
-    let indexPath = IndexPath(item: 0, section: type.rawValue)
-    
-    tableNode.performBatchUpdates {
-      tableNode.insertRows(at: [indexPath], with: .left)
-    } completion: { [weak self] _ in
-      DispatchQueue.main.async {
-        let cell = self?.tableNode.nodeForRow(at: indexPath) as? TaskCell
-        cell?.textFieldNode.textField?.becomeFirstResponder()
-      }
-    }
+    taskInputView.textField.becomeFirstResponder()
+    taskInputView.addButton.backgroundColor = type.color
   }
 }
 
