@@ -11,6 +11,7 @@ import InfiniteLayout
 
 protocol PeriodViewDelegate: class {
   func didSelectPeriod(_ type: PeriodType, date: Date)
+  func didEndDisplayPeriod(_ type: PeriodType?, date: Date)
 }
 
 final class PeriodView: BaseView {
@@ -171,5 +172,6 @@ extension PeriodView: InfiniteCollectionViewDelegate {
       date: date
     )
     viewModel.event.requestDatePrefetch.accept(request)
+    delegate?.didEndDisplayPeriod(periodType, date: date)
   }
 }

@@ -23,7 +23,8 @@ final class TaskViewController: BaseASViewController {
   private let taskInputView = TaskInputView()
   
   // MARK: Data Store
-  private var periodTypes = [PeriodType]()
+  private var periodTypes = PeriodType.allCases
+  lazy var currentDates = Array(repeating: Date(), count: periodTypes.count)
   private var tasks = [Task]()
   private var addingDate: Date?
   private var addingPeriodType: Int?
@@ -96,13 +97,6 @@ extension TaskViewController {
       .disposed(by: disposeBag)
     
     // State
-    viewModel.state.periodTypes
-      .asDriverOnErrorJustComplete()
-      .drive(onNext: { [weak self] in
-        self?.periodTypes = $0
-        self?.tableNode.reloadData()
-      }).disposed(by: disposeBag)
-    
     viewModel.state.addTask
       .asDriverOnErrorJustComplete()
       .drive(onNext: { [weak self] newTask in
@@ -114,6 +108,13 @@ extension TaskViewController {
         } completion: { (_) in
           self?.tableNode.scrollToRow(at: indexPath, at: .top, animated: true)
         }
+      }).disposed(by: disposeBag)
+    
+    viewModel.state.tasks
+      .asDriverOnErrorJustComplete()
+      .drive(onNext: { [weak self] in
+        self?.tasks = $0
+        self?.tableNode.reloadData()
       }).disposed(by: disposeBag)
     
     RxKeyboard.instance.visibleHeight
@@ -132,13 +133,15 @@ extension TaskViewController {
 extension TaskViewController: ASTableDataSource {
   
   func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-    return tasks.filter { $0.periodType == periodTypes[section].rawValue }.count
+    return tasks.filter { $0.periodType == periodTypes[section].rawValue && $0.date == currentDates[$0.periodType] }.count
   }
   
   func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
     return { [weak self] in
       let cell = TaskCell()
-      let task = self?.tasks.filter { $0.periodType == self?.periodTypes[indexPath.section].rawValue }[indexPath.row]
+      let task = self?.tasks.filter {
+        $0.periodType == self?.periodTypes[indexPath.section].rawValue
+          && $0.date == self?.currentDates[$0.periodType] }[indexPath.row]
       cell.configure(task)
       return cell
     }
@@ -160,6 +163,12 @@ extension TaskViewController: ASTableDelegate {
 }
 
 extension TaskViewController: PeriodViewDelegate {
+  func didEndDisplayPeriod(_ type: PeriodType?, date: Date) {
+    let section = type?.rawValue ?? 0
+    self.currentDates[section] = date
+    tableNode.reloadSections(.init(integer: section), with: .automatic)
+  }
+  
   func didSelectPeriod(_ type: PeriodType, date: Date) {
     taskInputView.textField.text = nil
     taskInputView.textField.becomeFirstResponder()

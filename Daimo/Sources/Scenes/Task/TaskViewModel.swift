@@ -21,7 +21,6 @@ final class TaskViewModel: BaseViewModel {
   }
   
   struct State {
-    let periodTypes = PublishRelay<[PeriodType]>()
     let addTask = PublishRelay<Task>()
     let tasks = PublishRelay<[Task]>()
   }
@@ -34,8 +33,8 @@ extension TaskViewModel {
   override func reduce() {
     super.reduce()
     event.onAppear.take(1)
-      .compactMap { [weak self] in self?.dateService.fetchPeriodTypes() }
-      .bind(to: state.periodTypes)
+      .compactMap { [weak self] in self?.coreDataService.fetch(request: Task.fetchRequest() )}
+      .bind(to: state.tasks)
       .disposed(by: disposeBag)
     
     event.tappedAddButton
