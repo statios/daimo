@@ -8,13 +8,15 @@
 import UIKit
 import SnapKit
 import AsyncDisplayKit
+import Resolver
 
 final class TaskViewController: BaseASViewController {
   struct Metric {
     static let periodViewHeight: CGFloat = .init(156)
   }
   
-  private let viewModel = TaskViewModel()
+  @Injected var viewModel: TaskViewModel
+  
   private let tableNode = ASTableNode()
   
   private var periodTypes = [PeriodType]()
@@ -43,11 +45,15 @@ extension TaskViewController {
       $0.dataSource = self
       $0.view.sectionHeaderHeight = Metric.periodViewHeight
       $0.view.separatorStyle = .none
+      $0.view.add(to: view)
+      $0.view.snp.makeConstraints { (make) in
+        make.leading.equalToSuperview()
+        make.trailing.equalToSuperview()
+        make.top.equalToSuperview()
+        make.bottom.equalTo(view.keyboardLayoutGuideNoSafeArea.snp.top)
+      }
+      $0.view.keyboardDismissMode = .onDrag
     }
-  }
-  
-  override func layoutSpec(node: ASDisplayNode, size: ASSizeRange) -> ASLayoutSpec {
-    ASInsetLayoutSpec(insets: .zero, child: tableNode)
   }
 }
 
@@ -104,11 +110,20 @@ extension TaskViewController: PeriodViewDelegate {
     let task = Task()
     task.periodType = type.rawValue
     tasks.insert(task, at: 0)
+    
     let indexPath = IndexPath(item: 0, section: type.rawValue)
+    
     tableNode.performBatchUpdates {
-      tableNode.insertRows(at: [indexPath], with: .fade)
+      tableNode.insertRows(at: [indexPath], with: .left)
     } completion: { [weak self] _ in
-      self?.tableNode.scrollToRow(at: indexPath, at: .top, animated: true)
+      DispatchQueue.main.async {
+        let cell = self?.tableNode.nodeForRow(at: indexPath) as? TaskCell
+        cell?.textFieldNode.textField?.becomeFirstResponder()
+      }
     }
   }
+}
+
+// MARK: - Helpers
+extension TaskViewController {
 }

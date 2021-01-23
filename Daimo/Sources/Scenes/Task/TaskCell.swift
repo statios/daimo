@@ -8,8 +8,11 @@
 import Foundation
 import UIKit
 import AsyncDisplayKit
+import Resolver
 
 final class TaskCell: BaseCellNode {
+  
+  @Injected var viewModel: TaskViewModel
   
   let containerNode = BaseNode().then {
     $0.style.preferredSize.height = 40

@@ -17,6 +17,7 @@
 		F915C73E25BAC55000B13AAD /* BaseNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F915C73D25BAC55000B13AAD /* BaseNode.swift */; };
 		F915C74325BAC8DA00B13AAD /* BaseCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F915C74225BAC8DA00B13AAD /* BaseCellNode.swift */; };
 		F969AC4725BC2CAC0065A4ED /* TextFieldNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC4625BC2CAC0065A4ED /* TextFieldNode.swift */; };
+		F969AC5825BC3A140065A4ED /* KeyboardLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC5725BC3A140065A4ED /* KeyboardLayoutGuide.swift */; };
 		F972D32125B81CC200C4959C /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32025B81CC200C4959C /* DateService.swift */; };
 		F972D32A25B8508D00C4959C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32925B8508D00C4959C /* UIView+.swift */; };
 		F972D33225B851C100C4959C /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D33125B851C100C4959C /* UITableView+.swift */; };
@@ -93,6 +94,7 @@
 		F915C73D25BAC55000B13AAD /* BaseNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNode.swift; sourceTree = "<group>"; };
 		F915C74225BAC8DA00B13AAD /* BaseCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellNode.swift; sourceTree = "<group>"; };
 		F969AC4625BC2CAC0065A4ED /* TextFieldNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldNode.swift; sourceTree = "<group>"; };
+		F969AC5725BC3A140065A4ED /* KeyboardLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutGuide.swift; sourceTree = "<group>"; };
 		F972D32025B81CC200C4959C /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		F972D32925B8508D00C4959C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		F972D33125B851C100C4959C /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				F9BB780525B789DC00616024 /* Log.swift */,
+				F969AC5725BC3A140065A4ED /* KeyboardLayoutGuide.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9C98C7C25B78F8B0027AC60 /* TaskViewModel.swift in Sources */,
+				F969AC5825BC3A140065A4ED /* KeyboardLayoutGuide.swift in Sources */,
 				F972D34625B8542800C4959C /* PeriodType.swift in Sources */,
 				F972D38325B85B7500C4959C /* Color.swift in Sources */,
 				F972D3A125B89EAA00C4959C /* PeriodViewModel.swift in Sources */,

@@ -15,5 +15,7 @@ extension Resolver: ResolverRegistering {
     register { CoreDataService() }
       .implements(CoreDataServiceType.self)
       .scope(.shared)
+    register { TaskViewModel() }
+      .scope(.shared)
   }
 }
