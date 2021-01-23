@@ -25,7 +25,7 @@ final class TaskCell: BaseCellNode {
     $0.backgroundColor = .red
   }
   
-  let textFieldNode = TextFieldNode().then {
+  let taskTextNode = ASTextNode().then {
     $0.style.flexGrow = 1
     $0.backgroundColor = .brown
   }
@@ -44,7 +44,7 @@ extension TaskCell {
       spacing: 8,
       justifyContent: .start,
       alignItems: .stretch,
-      children: [doneNode, textFieldNode]
+      children: [doneNode, taskTextNode]
     )
     
     let insetHorizontalStackLayout = ASInsetLayoutSpec(
@@ -66,6 +66,6 @@ extension TaskCell {
 
 extension TaskCell {
   func configure(_ task: Task?) {
-    
+    taskTextNode.attributedText = NSAttributedString(string: task?.content ?? "")
   }
 }

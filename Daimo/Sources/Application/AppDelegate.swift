@@ -41,7 +41,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //
 //  // MARK: - Core Data stack
 //
-
+  let persistentContainer = NSPersistentContainer(name: "Daimo").then {
+    $0.loadPersistentStores { (storeDescription, error) in
+      guard let error = error as NSError? else { return }
+      fatalError("Unresolved error \(error), \(error.userInfo)")
+    }
+  }
+  
+  var context: NSManagedObjectContext {
+    return persistentContainer.viewContext
+  }
 //
 //  // MARK: - Core Data Saving support
 //

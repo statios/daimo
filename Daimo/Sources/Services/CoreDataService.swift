@@ -7,30 +7,20 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 protocol CoreDataServiceType {
   func fetch<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T]
   @discardableResult func delete(object: NSManagedObject) -> Bool
   @discardableResult func deleteAll<T: NSManagedObject>(request: NSFetchRequest<T>) -> Bool
-//  @discardableResult
-//  func insertTask(
-//    content: String,
-//    isDone: Bool,
-//    date: Date,
-//    periodType: Int
-//  ) -> Bool
+  @discardableResult func insert(task: Task) -> Bool
 }
 
 class CoreDataService: CoreDataServiceType {
-  private let persistentContainer = NSPersistentContainer(name: "Daimo").then {
-    $0.loadPersistentStores { (storeDescription, error) in
-      guard let error = error as NSError? else { return }
-      fatalError("Unresolved error \(error), \(error.userInfo)")
-    }
-  }
   
-  private var context: NSManagedObjectContext {
-    return persistentContainer.viewContext
+  var context: NSManagedObjectContext {
+    guard let delegate = UIApplication.shared.delegate as? AppDelegate else { fatalError() }
+    return delegate.persistentContainer.viewContext
   }
   
   func fetch<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T] {
@@ -42,32 +32,27 @@ class CoreDataService: CoreDataServiceType {
     }
   }
   
-//  @discardableResult
-//  func insertTask(
-//    content: String,
-//    isDone: Bool,
-//    date: Date,
-//    periodType: Int
-//  ) -> Bool {
-//    
-//    guard let entity = NSEntityDescription.entity(forEntityName: "Task", in: context) else {
-//      return false
-//    }
-//    
-//    let object = NSManagedObject(entity: entity, insertInto: context)
-//    object.setValue(content, forKey: "content")
-//    object.setValue(isDone, forKey: "isDone")
-//    object.setValue(date, forKey: "date")
-//    object.setValue(periodType, forKey: "periodType")
-//    
-//    do {
-//      try context.save()
-//      return true
-//    } catch {
-//      Log.error(error.localizedDescription)
-//      return false
-//    }
-//  }
+  @discardableResult
+  func insert(task: Task) -> Bool {
+    
+    guard let entity = NSEntityDescription.entity(forEntityName: "Task", in: context) else {
+      return false
+    }
+    
+    let object = NSManagedObject(entity: entity, insertInto: context)
+    object.setValue(task.content, forKey: "content")
+    object.setValue(task.isDone, forKey: "isDone")
+    object.setValue(task.date, forKey: "date")
+    object.setValue(task.periodType, forKey: "periodType")
+    
+    do {
+      try context.save()
+      return true
+    } catch {
+      Log.error(error.localizedDescription)
+      return false
+    }
+  }
   
   @discardableResult
   func delete(object: NSManagedObject) -> Bool {

@@ -18,19 +18,15 @@ final class TaskViewController: BaseASViewController {
   
   @Injected var viewModel: TaskViewModel
   
+  // MARK: UI
   private let tableNode = ASTableNode()
   private let taskInputView = TaskInputView()
   
+  // MARK: Data Store
   private var periodTypes = [PeriodType]()
   private var tasks = [Task]()
-  
-  override var inputAccessoryView: UIView? {
-    return taskInputView
-  }
-  
-  override var canBecomeFirstResponder: Bool {
-    return true
-  }
+  private var addingDate: Date?
+  private var addingPeriodType: Int?
 }
 
 extension TaskViewController {
@@ -66,6 +62,15 @@ extension TaskViewController {
       $0.view.separatorStyle = .none
       $0.view.keyboardDismissMode = .onDrag
     }
+    
+    taskInputView.do {
+      $0.add(to: view)
+      $0.snp.makeConstraints { (make) in
+        make.leading.trailing.equalToSuperview()
+        make.bottom.equalTo(view.keyboardLayoutGuideNoSafeArea.snp.top)
+        make.height.equalTo(56)
+      }
+    }
   }
 }
 
@@ -77,12 +82,38 @@ extension TaskViewController {
       .bind(to: viewModel.event.onAppear)
       .disposed(by: disposeBag)
     
+    taskInputView.addButton.rx.tap
+      .do(onNext: { [weak self] in self?.view.endEditing(true) })
+      .map { [weak self] in
+        guard let `self` = self else { fatalError() }
+        return Task(
+          content: self.taskInputView.textField.text,
+          periodType: self.addingPeriodType ?? 0,
+          isDone: false,
+          date: self.addingDate
+        )
+      }.bind(to: viewModel.event.tappedAddButton)
+      .disposed(by: disposeBag)
+    
     // State
     viewModel.state.periodTypes
       .asDriverOnErrorJustComplete()
       .drive(onNext: { [weak self] in
         self?.periodTypes = $0
         self?.tableNode.reloadData()
+      }).disposed(by: disposeBag)
+    
+    viewModel.state.addTask
+      .asDriverOnErrorJustComplete()
+      .drive(onNext: { [weak self] newTask in
+        self?.tasks.append(newTask)
+        let count = self?.tasks.filter { $0.periodType == newTask.periodType }.count ?? 0
+        let indexPath = IndexPath(row: count - 1, section: newTask.periodType)
+        self?.tableNode.performBatchUpdates {
+          self?.tableNode.insertRows(at: [indexPath], with: .left)
+        } completion: { (_) in
+          self?.tableNode.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
       }).disposed(by: disposeBag)
     
     RxKeyboard.instance.visibleHeight
@@ -130,8 +161,11 @@ extension TaskViewController: ASTableDelegate {
 
 extension TaskViewController: PeriodViewDelegate {
   func didSelectPeriod(_ type: PeriodType, date: Date) {
+    taskInputView.textField.text = nil
     taskInputView.textField.becomeFirstResponder()
     taskInputView.addButton.backgroundColor = type.color
+    addingPeriodType = type.rawValue
+    addingDate = date
   }
 }
 

@@ -13,14 +13,17 @@ import UIKit
 final class TaskViewModel: BaseViewModel {
   
   @Injected var dateService: DateServiceType
+  @Injected var coreDataService: CoreDataServiceType
   
   struct Event {
     let onAppear = PublishRelay<Void>()
+    let tappedAddButton = PublishRelay<Task>()
   }
   
   struct State {
     let periodTypes = PublishRelay<[PeriodType]>()
-    let createTask = PublishRelay<Void>()
+    let addTask = PublishRelay<Task>()
+    let tasks = PublishRelay<[Task]>()
   }
   
   let event = Event()
@@ -33,6 +36,12 @@ extension TaskViewModel {
     event.onAppear.take(1)
       .compactMap { [weak self] in self?.dateService.fetchPeriodTypes() }
       .bind(to: state.periodTypes)
+      .disposed(by: disposeBag)
+    
+    event.tappedAddButton
+      .do(onNext: { [weak self] in
+        self?.coreDataService.insert(task: $0)
+      }).bind(to: state.addTask)
       .disposed(by: disposeBag)
   }
 }

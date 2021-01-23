@@ -15,9 +15,7 @@ final class TaskInputView: UIView {
   let addButton = UIButton()
   
   init() {
-    super.init(
-      frame: .init(x: 0, y: 0, width: Device.width, height: 56)
-    )
+    super.init(frame: .zero)
     
     isHidden = true
     backgroundColor = .white
