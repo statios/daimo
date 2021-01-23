@@ -20,8 +20,9 @@ final class PeriodView: BaseView {
     static let titleBottomPadding = CGFloat(8)
     static let cellWidth = Device.width - 24 - 24
     static let cellSpace = CGFloat(8)
+    static let cellBottomPadding = CGFloat(4)
     static let titleHeightWithPadding = titleTopPadding + titleHeight + titleBottomPadding
-    static let cellHeight = TaskViewController.Metric.periodViewHeight - titleHeightWithPadding
+    static let cellHeight = TaskViewController.Metric.periodViewHeight - titleHeightWithPadding - cellBottomPadding
   }
   
   private let viewModel = PeriodViewModel()

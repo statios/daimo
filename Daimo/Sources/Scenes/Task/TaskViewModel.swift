@@ -15,7 +15,6 @@ final class TaskViewModel: BaseViewModel {
   
   struct Event {
     let onAppear = PublishRelay<Void>()
-    
   }
   
   struct State {

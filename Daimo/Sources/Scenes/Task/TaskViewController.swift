@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 import AsyncDisplayKit
 
-final class TaskViewController: BaseViewController {
+final class TaskViewController: BaseASViewController {
   struct Metric {
     static let periodViewHeight: CGFloat = .init(156)
   }
   
   private let viewModel = TaskViewModel()
-  private let tableView = BaseTableView()
+  private let tableNode = ASTableNode()
   
   private var periodTypes = [PeriodType]()
   private var tasks = [Task]()
@@ -37,19 +37,17 @@ extension TaskViewController {
       $0.backgroundColor = .white
     }
     
-    tableView.do {
-      $0.add(to: view)
-      $0.snp.makeConstraints { (make) in
-        make.edges.equalToSuperview()
-      }
+    tableNode.do {
       $0.backgroundColor = .white
-      $0.sectionHeaderHeight = Metric.periodViewHeight
       $0.delegate = self
       $0.dataSource = self
-      $0.register(cellType: TaskCell.self)
-      $0.rowHeight = 4 + 44 + 4
-      $0.estimatedRowHeight = 4 + 44 + 4
+      $0.view.sectionHeaderHeight = Metric.periodViewHeight
+      $0.view.separatorStyle = .none
     }
+  }
+  
+  override func layoutSpec(node: ASDisplayNode, size: ASSizeRange) -> ASLayoutSpec {
+    ASInsetLayoutSpec(insets: .zero, child: tableNode)
   }
 }
 
@@ -66,29 +64,30 @@ extension TaskViewController {
       .asDriverOnErrorJustComplete()
       .drive(onNext: { [weak self] in
         self?.periodTypes = $0
-        self?.tableView.reloadData()
+        self?.tableNode.reloadData()
       }).disposed(by: disposeBag)
   }
 }
 
-extension TaskViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension TaskViewController: ASTableDataSource {
+  
+  func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
     return tasks.filter { $0.periodType == periodTypes[section].rawValue }.count
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(
-      withIdentifier: TaskCell.className,
-      for: indexPath
-    ) as? TaskCell else { fatalError() }
-    let task = tasks.filter { $0.periodType == periodTypes[indexPath.section].rawValue }[indexPath.row]
-    cell.configure(task)
-    return cell
+  func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
+    return { [weak self] in
+      let cell = TaskCell()
+      let task = self?.tasks.filter { $0.periodType == self?.periodTypes[indexPath.section].rawValue }[indexPath.row]
+      cell.configure(task)
+      return cell
+    }
   }
 }
 
-extension TaskViewController: UITableViewDelegate {
-  func numberOfSections(in tableView: UITableView) -> Int {
+extension TaskViewController: ASTableDelegate {
+  
+  func numberOfSections(in tableNode: ASTableNode) -> Int {
     return periodTypes.count
   }
   
@@ -106,12 +105,10 @@ extension TaskViewController: PeriodViewDelegate {
     task.periodType = type.rawValue
     tasks.insert(task, at: 0)
     let indexPath = IndexPath(item: 0, section: type.rawValue)
-    //    tableView.isUserInteractionEnabled = false
-    
-    tableView.beginUpdates()
-    tableView.insertRows(at: [indexPath], with: .none)
-    tableView.endUpdates()
-//    tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-    
+    tableNode.performBatchUpdates {
+      tableNode.insertRows(at: [indexPath], with: .fade)
+    } completion: { [weak self] _ in
+      self?.tableNode.scrollToRow(at: indexPath, at: .top, animated: true)
+    }
   }
 }
