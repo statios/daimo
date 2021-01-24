@@ -20,14 +20,13 @@ final class TaskCell: BaseCellNode {
     $0.backgroundColor = Color.veryLightPink
   }
   
-  let doneNode = BaseNode().then {
-    $0.style.preferredSize.width = 24
-    $0.backgroundColor = .red
+  let doneImageNode = ASImageNode().then {
+    $0.style.preferredSize = CGSize(width: 24, height: 24)
+    $0.tintColor = Color.greyishBrown
   }
   
   let taskTextNode = ASTextNode().then {
     $0.style.flexGrow = 1
-    $0.backgroundColor = .brown
   }
 }
 
@@ -43,8 +42,8 @@ extension TaskCell {
       direction: .horizontal,
       spacing: 8,
       justifyContent: .start,
-      alignItems: .stretch,
-      children: [doneNode, taskTextNode]
+      alignItems: .center,
+      children: [doneImageNode, taskTextNode]
     )
     
     let insetHorizontalStackLayout = ASInsetLayoutSpec(
@@ -66,6 +65,15 @@ extension TaskCell {
 
 extension TaskCell {
   func configure(_ task: Task?) {
-    taskTextNode.attributedText = NSAttributedString(string: task?.content ?? "")
+    var attributes = [
+      NSAttributedString.Key.font: Font.yoonGothic230.withSize(13),
+      NSAttributedString.Key.foregroundColor: Color.darkGray,
+    ]
+    let attstring = NSAttributedString(
+      string: task?.content ?? "",
+      attributes: attributes
+    )
+    taskTextNode.attributedText = attstring
+    doneImageNode.image = task?.isDone == true ? Image.checkBox : Image.unCheckBox
   }
 }

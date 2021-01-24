@@ -45,6 +45,7 @@ final class PeriodView: BaseView {
   weak var delegate: PeriodViewDelegate?
   private var periodDates = [Date]()
   private var periodType: PeriodType?
+  private var currentDate: Date?
 }
 
 extension PeriodView {
@@ -107,9 +108,10 @@ extension PeriodView {
 }
 
 extension PeriodView {
-  func configure(_ item: PeriodType) {
-    viewModel.event.onConfigure.accept(item)
+  func configure(_ item: PeriodType, date: Date) {
+    viewModel.event.onConfigure.accept((item, date))
     periodType = item
+    currentDate = date
   }
 }
 

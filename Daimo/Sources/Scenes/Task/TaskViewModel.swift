@@ -23,6 +23,7 @@ final class TaskViewModel: BaseViewModel {
   struct State {
     let addTask = PublishRelay<Task>()
     let tasks = PublishRelay<[Task]>()
+    let dates = PublishRelay<[Date]>()
   }
   
   let event = Event()
@@ -37,9 +38,15 @@ extension TaskViewModel {
       .bind(to: state.tasks)
       .disposed(by: disposeBag)
     
+    event.onAppear.take(1)
+      .map { PeriodType.allCases }
+      .compactMap { [weak self] in $0.compactMap { type in self?.dateService.fetchDate(type, date: Date()) } }
+      .bind(to: state.dates)
+      .disposed(by: disposeBag)
+    
     event.tappedAddButton
       .do(onNext: { [weak self] in
-        self?.coreDataService.insert(task: $0)
+        self?.coreDataService.insert(object: $0)
       }).bind(to: state.addTask)
       .disposed(by: disposeBag)
   }

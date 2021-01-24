@@ -13,7 +13,7 @@ protocol CoreDataServiceType {
   func fetch<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T]
   @discardableResult func delete(object: NSManagedObject) -> Bool
   @discardableResult func deleteAll<T: NSManagedObject>(request: NSFetchRequest<T>) -> Bool
-  @discardableResult func insert(task: Task) -> Bool
+  @discardableResult func insert<T: NSManagedObject>(object: T) -> Bool
 }
 
 class CoreDataService: CoreDataServiceType {
@@ -33,18 +33,7 @@ class CoreDataService: CoreDataServiceType {
   }
   
   @discardableResult
-  func insert(task: Task) -> Bool {
-    
-    guard let entity = NSEntityDescription.entity(forEntityName: "Task", in: context) else {
-      return false
-    }
-    
-    let object = NSManagedObject(entity: entity, insertInto: context)
-    object.setValue(task.content, forKey: "content")
-    object.setValue(task.isDone, forKey: "isDone")
-    object.setValue(task.date, forKey: "date")
-    object.setValue(task.periodType, forKey: "periodType")
-    
+  func insert<T: NSManagedObject>(object: T) -> Bool {
     do {
       try context.save()
       return true

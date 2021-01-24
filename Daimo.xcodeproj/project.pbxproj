@@ -20,6 +20,7 @@
 		F969AC5825BC3A140065A4ED /* KeyboardLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC5725BC3A140065A4ED /* KeyboardLayoutGuide.swift */; };
 		F969AC6025BC5C690065A4ED /* RxKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC5F25BC5C690065A4ED /* RxKeyboard.swift */; };
 		F969AC6625BC8C6D0065A4ED /* TaskInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC6525BC8C6D0065A4ED /* TaskInputView.swift */; };
+		F969AC8225BD73ED0065A4ED /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC8125BD73ED0065A4ED /* Image.swift */; };
 		F972D32125B81CC200C4959C /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32025B81CC200C4959C /* DateService.swift */; };
 		F972D32A25B8508D00C4959C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32925B8508D00C4959C /* UIView+.swift */; };
 		F972D33225B851C100C4959C /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D33125B851C100C4959C /* UITableView+.swift */; };
@@ -99,6 +100,7 @@
 		F969AC5725BC3A140065A4ED /* KeyboardLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutGuide.swift; sourceTree = "<group>"; };
 		F969AC5F25BC5C690065A4ED /* RxKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxKeyboard.swift; sourceTree = "<group>"; };
 		F969AC6525BC8C6D0065A4ED /* TaskInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInputView.swift; sourceTree = "<group>"; };
+		F969AC8125BD73ED0065A4ED /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		F972D32025B81CC200C4959C /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		F972D32925B8508D00C4959C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		F972D33125B851C100C4959C /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				F972D36E25B85A0200C4959C /* Font.swift */,
 				F972D38225B85B7500C4959C /* Color.swift */,
 				F972D39125B8705000C4959C /* Device.swift */,
+				F969AC8125BD73ED0065A4ED /* Image.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				F972D38D25B86F5800C4959C /* UICollectionView.swift in Sources */,
 				F9C98C6E25B78F240027AC60 /* ObservableType+.swift in Sources */,
 				F972D40425B9B7F100C4959C /* DatePrefetch.swift in Sources */,
+				F969AC8225BD73ED0065A4ED /* Image.swift in Sources */,
 				F9BB781625B78A1200616024 /* BaseViewModel.swift in Sources */,
 				F972D42025BA6CBB00C4959C /* CoreDataService.swift in Sources */,
 				F972D34025B8536600C4959C /* BaseNavigationController.swift in Sources */,

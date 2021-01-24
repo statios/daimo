@@ -9,8 +9,8 @@ import Foundation
 
 protocol DateServiceType {
   func fetchPeriodTypes() -> [PeriodType]
-  func fetchToday(_ type: PeriodType) -> Date
-  func fetchTodays(_ type: PeriodType) -> [Date]
+  func fetchDate(_ type: PeriodType, date: Date) -> Date
+  func fetchDates(_ type: PeriodType, date: Date) -> [Date]
   func prefetchDate(_ type: PeriodType, direction: Int, date: Date) -> Date
 }
 
@@ -19,8 +19,8 @@ class DateService: DateServiceType {
     return PeriodType.allCases
   }
   
-  func fetchToday(_ type: PeriodType) -> Date {
-    let components = Calendar.current.dateComponents(type.calendarComponents, from: Date())
+  func fetchDate(_ type: PeriodType, date: Date) -> Date {
+    let components = Calendar.current.dateComponents(type.calendarComponents, from: date)
     if type == .weekly {
       let weekday = components.weekday ?? 1
       let date = Calendar.current.date(from: components) ?? Date()
@@ -31,12 +31,12 @@ class DateService: DateServiceType {
     return Calendar.current.date(from: components) ?? Date()
   }
   
-  func fetchTodays(_ type: PeriodType) -> [Date] {
+  func fetchDates(_ type: PeriodType, date: Date) -> [Date] {
     return [0, 1, 2, 3, -3, -2, -1].compactMap {
       if type == .weekly {
-        return Calendar.current.date(byAdding: type.byAdding, value: $0 * 7, to: fetchToday(type))
+        return Calendar.current.date(byAdding: type.byAdding, value: $0 * 7, to: fetchDate(type, date: date))
       }
-      return Calendar.current.date(byAdding: type.byAdding, value: $0, to: fetchToday(type))
+      return Calendar.current.date(byAdding: type.byAdding, value: $0, to: fetchDate(type, date: date))
     }
   }
   
