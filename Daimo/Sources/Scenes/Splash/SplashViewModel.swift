@@ -12,11 +12,11 @@ import UIKit
 final class SplashViewModel: BaseViewModel {
   
   struct Event {
-    let onAppear = PublishRelay<Void>()
+    let endAnimation = PublishRelay<Void>()
   }
   
   struct State {
-    let present = BehaviorRelay<UIViewController?>(value: nil)
+    let present = PublishRelay<UIViewController>()
   }
   
   let event = Event()
@@ -26,8 +26,7 @@ final class SplashViewModel: BaseViewModel {
 extension SplashViewModel {
   override func reduce() {
     super.reduce()
-    event.onAppear
-      .delay(.milliseconds(2000), scheduler: MainScheduler.instance)
+    event.endAnimation
       .map { BaseNavigationController(rootViewController: TaskViewController()) }
       .bind(to: state.present)
       .disposed(by: disposeBag)

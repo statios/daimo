@@ -22,6 +22,9 @@
 		F969AC6625BC8C6D0065A4ED /* TaskInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC6525BC8C6D0065A4ED /* TaskInputView.swift */; };
 		F969AC8225BD73ED0065A4ED /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC8125BD73ED0065A4ED /* Image.swift */; };
 		F969AC9525BE05660065A4ED /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969AC9425BE05660065A4ED /* UIImage.swift */; };
+		F969ACA725BE1FEA0065A4ED /* SplashAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969ACA625BE1FEA0065A4ED /* SplashAnimationView.swift */; };
+		F969ACB225BE203A0065A4ED /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969ACB125BE203A0065A4ED /* UILabel+.swift */; };
+		F969ACBF25BE2C800065A4ED /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F969ACBE25BE2C800065A4ED /* Colors.xcassets */; };
 		F972D32125B81CC200C4959C /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32025B81CC200C4959C /* DateService.swift */; };
 		F972D32A25B8508D00C4959C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D32925B8508D00C4959C /* UIView+.swift */; };
 		F972D33225B851C100C4959C /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972D33125B851C100C4959C /* UITableView+.swift */; };
@@ -103,6 +106,9 @@
 		F969AC6525BC8C6D0065A4ED /* TaskInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInputView.swift; sourceTree = "<group>"; };
 		F969AC8125BD73ED0065A4ED /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		F969AC9425BE05660065A4ED /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		F969ACA625BE1FEA0065A4ED /* SplashAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashAnimationView.swift; sourceTree = "<group>"; };
+		F969ACB125BE203A0065A4ED /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		F969ACBE25BE2C800065A4ED /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		F972D32025B81CC200C4959C /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		F972D32925B8508D00C4959C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		F972D33125B851C100C4959C /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
@@ -209,12 +215,20 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		F969AC6425BC8C630065A4ED /* Nodes */ = {
+		F969AC6425BC8C630065A4ED /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				F969AC6525BC8C6D0065A4ED /* TaskInputView.swift */,
 			);
-			path = Nodes;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F969ACA525BE1FE30065A4ED /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F969ACA625BE1FEA0065A4ED /* SplashAnimationView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F972D31F25B81CA700C4959C /* Services */ = {
@@ -233,6 +247,7 @@
 				F972D33125B851C100C4959C /* UITableView+.swift */,
 				F972D38C25B86F5800C4959C /* UICollectionView.swift */,
 				F969AC9425BE05660065A4ED /* UIImage.swift */,
+				F969ACB125BE203A0065A4ED /* UILabel+.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -405,6 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				F9BB778325B7867A00616024 /* Images.xcassets */,
+				F969ACBE25BE2C800065A4ED /* Colors.xcassets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -430,6 +446,7 @@
 			children = (
 				F9BB77F525B789A200616024 /* SplashViewController.swift */,
 				F9BB77FD25B789A800616024 /* SplashViewModel.swift */,
+				F969ACA525BE1FE30065A4ED /* Views */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -499,7 +516,7 @@
 				F9C98C7325B78F860027AC60 /* TaskViewController.swift */,
 				F9C98C7B25B78F8B0027AC60 /* TaskViewModel.swift */,
 				F972D44F25BAAA7700C4959C /* TaskCell.swift */,
-				F969AC6425BC8C630065A4ED /* Nodes */,
+				F969AC6425BC8C630065A4ED /* Views */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -627,6 +644,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F969ACBF25BE2C800065A4ED /* Colors.xcassets in Resources */,
 				F972D36825B8599F00C4959C /* HANYGO230.ttf in Resources */,
 				F9BB778725B7867A00616024 /* LaunchScreen.storyboard in Resources */,
 				F972D36925B8599F00C4959C /* Champagne & Limousines Bold.ttf in Resources */,
@@ -711,7 +729,9 @@
 				F9BB77FE25B789A800616024 /* SplashViewModel.swift in Sources */,
 				F915C74325BAC8DA00B13AAD /* BaseCellNode.swift in Sources */,
 				F972D39725B8986400C4959C /* PeriodCell.swift in Sources */,
+				F969ACA725BE1FEA0065A4ED /* SplashAnimationView.swift in Sources */,
 				F972D3DC25B9230A00C4959C /* BaseCollectionView.swift in Sources */,
+				F969ACB225BE203A0065A4ED /* UILabel+.swift in Sources */,
 				F972D33825B8520200C4959C /* NSObject+.swift in Sources */,
 				F969AC4725BC2CAC0065A4ED /* TextFieldNode.swift in Sources */,
 				F972D45A25BAABD700C4959C /* BaseTableView.swift in Sources */,
@@ -904,7 +924,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sogihyeon.Daimo2;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sogihyeon.Daimo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -928,7 +949,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sogihyeon.Daimo2;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sogihyeon.Daimo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

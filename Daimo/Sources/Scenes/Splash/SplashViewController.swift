@@ -6,25 +6,42 @@
 //
 
 import UIKit
+import Resolver
+import RxSwift
 
 final class SplashViewController: BaseViewController {
   
   let viewModel = SplashViewModel()
+  
+  let animationView = SplashAnimationView()
   
 }
 
 extension SplashViewController {
   override func setupUI() {
     super.setupUI()
+    animationView.do {
+      $0.add(to: view)
+      $0.snp.makeConstraints { (make) in
+        make.edges.equalToSuperview()
+      }
+    }
   }
 }
 
 extension SplashViewController {
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+  }
+  
   override func setupBinding() {
     super.setupBinding()
     // Event
-    rx.viewWillAppear.asObservableVoid()
-      .bind(to: viewModel.event.onAppear)
+    rx.viewDidAppear.asObservableVoid()
+      .flatMap { [weak self] _ -> Observable<Void> in
+        guard let `self` = self else { fatalError() }
+        return self.animationView.animateSplash()
+      }.bind(to: viewModel.event.endAnimation)
       .disposed(by: disposeBag)
     
     // State
