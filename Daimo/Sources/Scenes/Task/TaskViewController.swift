@@ -67,7 +67,7 @@ extension TaskViewController {
         NSAttributedString.Key.foregroundColor: Color.greyishBrown,
         NSAttributedString.Key.font: Font.champagneBold.withSize(23)
       ]
-//      $0.hidesBarsOnSwipe = true 
+      $0.hidesBarsOnSwipe = true
     }
     
     view.do {
@@ -163,6 +163,20 @@ extension TaskViewController {
       taskInputView.textField.rx.controlEvent(.editingDidEnd).map { true }
     ).bind(to: taskInputView.rx.isHidden)
     .disposed(by: disposeBag)
+    
+    taskInputView.textField.rx.text.orEmpty
+      .map { !$0.isEmpty }
+      .bind(to: taskInputView.addButton.rx.isUserInteractionEnabled)
+      .disposed(by: disposeBag)
+    
+    taskInputView.textField.rx.text.orEmpty
+      .map { !$0.isEmpty }
+      .bind { [weak self] in
+        let color = self?.taskInputView.addButton.backgroundColor
+        self?.taskInputView.addButton.backgroundColor = $0 ?
+          color?.withAlphaComponent(1.0) :
+          color?.withAlphaComponent(0.5)
+      }.disposed(by: disposeBag)
   }
 }
 
@@ -257,7 +271,7 @@ extension TaskViewController: PeriodViewDelegate {
     }.enumerated().map {
       IndexPath(row: $0.offset, section: section)
     }
-    
+
     let cur = tasks.filter {
       $0.periodType == section &&
       $0.date == date
@@ -265,7 +279,7 @@ extension TaskViewController: PeriodViewDelegate {
       IndexPath(row: $0.offset, section: section)
     }
     currentDates[section] = date
-
+    
     if pre.count > cur.count {
       let indexPaths = (cur.count...pre.count-1).map { IndexPath(row: $0, section: section) }
       tableNode.deleteRows(at: indexPaths, with: .bottom)
