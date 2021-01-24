@@ -26,7 +26,7 @@ final class TaskCell: BaseCellNode {
   }
   
   let taskTextNode = ASTextNode().then {
-    $0.style.flexGrow = 1
+    $0.style.flexShrink = 1
   }
 }
 
@@ -65,15 +65,31 @@ extension TaskCell {
 
 extension TaskCell {
   func configure(_ task: Task?) {
-    var attributes = [
+    
+    let isDone = task?.isDone == true
+    
+    let attributes = [
       NSAttributedString.Key.font: Font.yoonGothic230.withSize(13),
-      NSAttributedString.Key.foregroundColor: Color.darkGray,
+      NSAttributedString.Key.foregroundColor: isDone ? Color.lightGray : Color.darkGray
     ]
-    let attstring = NSAttributedString(
-      string: task?.content ?? "",
+    
+    let string = task?.content ?? ""
+    
+    let attstring = NSMutableAttributedString(
+      string: string,
       attributes: attributes
     )
+    
+    if isDone {
+      attstring.addAttribute(
+        .strikethroughStyle,
+        value: NSUnderlineStyle.thick.rawValue,
+        range: .init(location: 0, length: string.count)
+      )
+    }
+    
     taskTextNode.attributedText = attstring
-    doneImageNode.image = task?.isDone == true ? Image.checkBox : Image.unCheckBox
+    doneImageNode.image = isDone ? Image.checkBox : Image.unCheckBox
+    doneImageNode.tintColor = isDone ? Color.lightGray : Color.darkGray
   }
 }

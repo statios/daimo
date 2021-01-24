@@ -51,6 +51,7 @@ extension TaskViewController {
 extension TaskViewController {
   override func setupUI() {
     super.setupUI()
+    
     view.do {
       $0.backgroundColor = .white
     }
@@ -148,6 +149,41 @@ extension TaskViewController: ASTableDataSource {
       return cell
     }
   }
+  
+  func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+    let index = tasks.enumerated().filter {
+      $0.element.periodType == indexPath.section &&
+      $0.element.date == currentDates[indexPath.section]
+    }[indexPath.row].offset
+    
+    tasks[index].isDone.toggle()
+    
+    tableNode.reloadRows(at: [indexPath], with: .fade)
+    viewModel.event.didSelectTask.accept(tasks[index])
+  }
+  
+  func tableView(
+    _ tableView: UITableView,
+    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+  ) -> UISwipeActionsConfiguration? {
+    let action = UIContextualAction(
+      style: .normal,
+      title: "Delete"
+    ) { [weak self] (action, view, success) in
+      guard let `self` = self else { return }
+      
+      let index = self.tasks.enumerated().filter {
+        $0.element.periodType == indexPath.section &&
+        $0.element.date == self.currentDates[indexPath.section]
+      }[indexPath.row].offset
+      
+      self.viewModel.event.didDeleteTask.accept(self.tasks[index])
+      self.tasks.remove(at: index)
+      self.tableNode.deleteRows(at: [indexPath], with: .left)
+    }
+    action.backgroundColor = Color.froly
+    return UISwipeActionsConfiguration(actions: [action])
+  }
 }
 
 extension TaskViewController: ASTableDelegate {
@@ -161,6 +197,12 @@ extension TaskViewController: ASTableDelegate {
     headerView.configure(periodTypes[section], date: currentDates[section])
     headerView.delegate = self
     return headerView
+  }
+}
+
+extension TaskViewController {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    navigationController?.navigationBar.frame.origin.y = min(-44, scrollView.contentOffset.y)
   }
 }
 

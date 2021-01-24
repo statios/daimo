@@ -18,6 +18,8 @@ final class TaskViewModel: BaseViewModel {
   struct Event {
     let onAppear = PublishRelay<Void>()
     let tappedAddButton = PublishRelay<Task>()
+    let didSelectTask = PublishRelay<Task>()
+    let didDeleteTask = PublishRelay<Task>()
   }
   
   struct State {
@@ -49,5 +51,15 @@ extension TaskViewModel {
         self?.coreDataService.insert(object: $0)
       }).bind(to: state.addTask)
       .disposed(by: disposeBag)
+    
+    event.didSelectTask
+      .bind { [weak self] in
+        self?.coreDataService.insert(object: $0)
+      }.disposed(by: disposeBag)
+    
+    event.didDeleteTask
+      .bind { [weak self] in
+        self?.coreDataService.delete(object: $0)
+      }.disposed(by: disposeBag)
   }
 }

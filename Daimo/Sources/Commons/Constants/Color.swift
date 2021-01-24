@@ -17,4 +17,6 @@ struct Color {
   static let brownGrey = UIColor(white: 163.0 / 255.0, alpha: 1.0)
   static let white = UIColor.white
   static let darkGray = UIColor.darkGray
+  static let lightGray = UIColor.lightGray
+  static let froly = UIColor(red: 0.95, green: 0.49, blue: 0.49, alpha: 1.0)
 }
