@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import InfiniteLayout
+import Resolver
 
 protocol PeriodViewDelegate: class {
   func didSelectPeriod(_ type: PeriodType, date: Date)
@@ -26,7 +27,7 @@ final class PeriodView: BaseView {
     static let cellHeight = TaskViewController.Metric.periodViewHeight - titleHeightWithPadding - cellBottomPadding
   }
   
-  private let viewModel = PeriodViewModel()
+  @Injected var viewModel: PeriodViewModel
   
   private let titleLabel = UILabel()
   private let collectionView: InfiniteCollectionView = {

@@ -17,5 +17,7 @@ extension Resolver: ResolverRegistering {
       .scope(.shared)
     register { TaskViewModel() }
       .scope(.shared)
+    register { PeriodViewModel() }
+      .scope(.unique)
   }
 }
