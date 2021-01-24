@@ -265,32 +265,33 @@ extension TaskViewController: PeriodViewDelegate {
   func didEndDisplayPeriod(_ type: PeriodType?, date: Date, direction: Int) {
     let section = type?.rawValue ?? 0
     
-    let pre = tasks.filter {
-      $0.periodType == section &&
-      $0.date == currentDates[section]
-    }.enumerated().map {
-      IndexPath(row: $0.offset, section: section)
-    }
-
-    let cur = tasks.filter {
-      $0.periodType == section &&
-      $0.date == date
-    }.enumerated().map {
-      IndexPath(row: $0.offset, section: section)
-    }
+//    let pre = tasks.filter {
+//      $0.periodType == section &&
+//      $0.date == currentDates[section]
+//    }.enumerated().map {
+//      IndexPath(row: $0.offset, section: section)
+//    }
+//
+//    let cur = tasks.filter {
+//      $0.periodType == section &&
+//      $0.date == date
+//    }.enumerated().map {
+//      IndexPath(row: $0.offset, section: section)
+//    }
     currentDates[section] = date
+    tableNode.reloadSections(.init(integer: section), with: .fade)
     
-    if pre.count > cur.count {
-      let indexPaths = (cur.count...pre.count-1).map { IndexPath(row: $0, section: section) }
-      tableNode.deleteRows(at: indexPaths, with: .bottom)
-      tableNode.reloadRows(at: cur, with: .none)
-    } else if pre.count == cur.count {
-      tableNode.reloadRows(at: cur, with: .none)
-    } else {
-      let indexPaths = (pre.count...cur.count-1).map { IndexPath(row: $0, section: section) }
-      tableNode.insertRows(at: indexPaths, with: .bottom)
-      tableNode.reloadRows(at: pre, with: .none)
-    }
+//    if pre.count > cur.count {
+//      let indexPaths = (cur.count...pre.count-1).map { IndexPath(row: $0, section: section) }
+//      tableNode.deleteRows(at: indexPaths, with: .bottom)
+//      tableNode.reloadRows(at: cur, with: .none)
+//    } else if pre.count == cur.count {
+//      tableNode.reloadRows(at: cur, with: .none)
+//    } else {
+//      let indexPaths = (pre.count...cur.count-1).map { IndexPath(row: $0, section: section) }
+//      tableNode.insertRows(at: indexPaths, with: .bottom)
+//      tableNode.reloadRows(at: pre, with: .none)
+//    }
     
   }
   
