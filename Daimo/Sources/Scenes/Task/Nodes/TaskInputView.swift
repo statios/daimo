@@ -12,7 +12,12 @@ final class TaskInputView: UIView {
   
   let containerView = UIView()
   let textField = UITextField()
-  let addButton = UIButton()
+  let addButton = UIButton().then {
+    let image = Image.plus?
+      .resized(to: .init(width: 12, height: 12))
+      .withTintColor(Color.white)
+    $0.setImage(image, for: .normal)
+  }
   
   init() {
     super.init(frame: .zero)

@@ -13,14 +13,15 @@ import RxSwift
 
 final class TaskViewController: BaseASViewController {
   struct Metric {
-    static let periodViewHeight: CGFloat = .init(156)
+    static let periodViewHeight: CGFloat = (Device.height - 196) / 4
   }
   
   @Injected var viewModel: TaskViewModel
   
   // MARK: UI
-  private let tableNode = ASTableNode()
+  private let tableNode = ASTableNode(style: .grouped)
   private let taskInputView = TaskInputView()
+  private let refreshControl = UIRefreshControl()
   
   // MARK: Data Store
   private var periodTypes = PeriodType.allCases
@@ -52,6 +53,23 @@ extension TaskViewController {
   override func setupUI() {
     super.setupUI()
     
+    self.do {
+      $0.title = "DAIMO"
+    }
+    
+    navigationController?.do {
+      $0.navigationBar.isTranslucent = false
+      $0.navigationBar.barTintColor = .white
+      $0.navigationBar.shadowImage = UIImage()
+      $0.navigationBar.setBackgroundImage(UIImage(), for: .default)
+      $0.navigationBar.backgroundColor = .clear
+      UINavigationBar.appearance().titleTextAttributes = [
+        NSAttributedString.Key.foregroundColor: Color.greyishBrown,
+        NSAttributedString.Key.font: Font.champagneBold.withSize(23)
+      ]
+//      $0.hidesBarsOnSwipe = true 
+    }
+    
     view.do {
       $0.backgroundColor = .white
     }
@@ -60,7 +78,6 @@ extension TaskViewController {
       $0.backgroundColor = .white
       $0.delegate = self
       $0.dataSource = self
-      $0.view.sectionHeaderHeight = Metric.periodViewHeight
       $0.view.separatorStyle = .none
       $0.view.keyboardDismissMode = .onDrag
     }
@@ -72,6 +89,16 @@ extension TaskViewController {
         make.bottom.equalTo(view.keyboardLayoutGuideNoSafeArea.snp.top)
         make.height.equalTo(56)
       }
+    }
+    
+    refreshControl.do {
+      $0.add(to: tableNode.view)
+      $0.attributedTitle = NSAttributedString(
+        string: "Today",
+        attributes: [
+          NSAttributedString.Key.foregroundColor: Color.greyishBrown
+        ]
+      )
     }
   }
 }
@@ -97,6 +124,10 @@ extension TaskViewController {
       }.bind(to: viewModel.event.tappedAddButton)
       .disposed(by: disposeBag)
     
+    refreshControl.rx.controlEvent(.valueChanged)
+      .bind(to: viewModel.event.onRefresh)
+      .disposed(by: disposeBag)
+    
     // State
     viewModel.state.addTask
       .asDriverOnErrorJustComplete()
@@ -107,7 +138,7 @@ extension TaskViewController {
         self?.tableNode.performBatchUpdates {
           self?.tableNode.insertRows(at: [indexPath], with: .left)
         } completion: { (_) in
-          self?.tableNode.scrollToRow(at: indexPath, at: .top, animated: true)
+          self?.tableNode.scrollToRow(at: indexPath, at: .middle, animated: true)
         }
       }).disposed(by: disposeBag)
     
@@ -119,6 +150,7 @@ extension TaskViewController {
       self?.tasks = $0.0
       self?.currentDates = $0.1
       self?.tableNode.reloadData()
+      self?.refreshControl.endRefreshing()
     }).disposed(by: disposeBag)
     
     RxKeyboard.instance.visibleHeight
@@ -137,14 +169,20 @@ extension TaskViewController {
 extension TaskViewController: ASTableDataSource {
   
   func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-    return tasks.filter { $0.periodType == periodTypes[section].rawValue && $0.date == currentDates[section] }.count
+    return tasks.filter {
+      $0.periodType == section &&
+      $0.date == currentDates[section]
+    }.count
   }
   
   func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
     return { [weak self] in
+      guard let `self` = self else { fatalError() }
       let cell = TaskCell()
-      let task = self?.tasks.filter {
-        $0.periodType == self?.periodTypes[indexPath.section].rawValue && $0.date == self?.currentDates[indexPath.section] }[indexPath.row]
+      let task = self.tasks.filter {
+        $0.periodType == indexPath.section &&
+        $0.date == self.currentDates[indexPath.section]
+      }[indexPath.row]
       cell.configure(task)
       return cell
     }
@@ -188,6 +226,10 @@ extension TaskViewController: ASTableDataSource {
 
 extension TaskViewController: ASTableDelegate {
   
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return Metric.periodViewHeight
+  }
+  
   func numberOfSections(in tableNode: ASTableNode) -> Int {
     return periodTypes.count
   }
@@ -202,21 +244,46 @@ extension TaskViewController: ASTableDelegate {
 
 extension TaskViewController {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    navigationController?.navigationBar.frame.origin.y = min(-44, scrollView.contentOffset.y)
   }
 }
 
 extension TaskViewController: PeriodViewDelegate {
-  func didEndDisplayPeriod(_ type: PeriodType?, date: Date) {
+  func didEndDisplayPeriod(_ type: PeriodType?, date: Date, direction: Int) {
     let section = type?.rawValue ?? 0
+    
+    let pre = tasks.filter {
+      $0.periodType == section &&
+      $0.date == currentDates[section]
+    }.enumerated().map {
+      IndexPath(row: $0.offset, section: section)
+    }
+    
+    let cur = tasks.filter {
+      $0.periodType == section &&
+      $0.date == date
+    }.enumerated().map {
+      IndexPath(row: $0.offset, section: section)
+    }
     currentDates[section] = date
-    tableNode.reloadSections(.init(integer: section), with: .fade)
+
+    if pre.count > cur.count {
+      let indexPaths = (cur.count...pre.count-1).map { IndexPath(row: $0, section: section) }
+      tableNode.deleteRows(at: indexPaths, with: .bottom)
+      tableNode.reloadRows(at: cur, with: .none)
+    } else if pre.count == cur.count {
+      tableNode.reloadRows(at: cur, with: .none)
+    } else {
+      let indexPaths = (pre.count...cur.count-1).map { IndexPath(row: $0, section: section) }
+      tableNode.insertRows(at: indexPaths, with: .bottom)
+      tableNode.reloadRows(at: pre, with: .none)
+    }
+    
   }
   
   func didSelectPeriod(_ type: PeriodType, date: Date) {
     taskInputView.textField.text = nil
     taskInputView.textField.becomeFirstResponder()
-    taskInputView.addButton.backgroundColor = type.color
+    taskInputView.addButton.backgroundColor = type.color.withAlphaComponent(0.5)
     addingPeriodType = type.rawValue
     addingDate = date
   }
@@ -224,5 +291,4 @@ extension TaskViewController: PeriodViewDelegate {
 
 // MARK: - Helpers
 extension TaskViewController {
-  
 }

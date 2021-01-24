@@ -20,6 +20,7 @@ final class TaskViewModel: BaseViewModel {
     let tappedAddButton = PublishRelay<Task>()
     let didSelectTask = PublishRelay<Task>()
     let didDeleteTask = PublishRelay<Task>()
+    let onRefresh = PublishRelay<Void>()
   }
   
   struct State {
@@ -35,16 +36,21 @@ final class TaskViewModel: BaseViewModel {
 extension TaskViewModel {
   override func reduce() {
     super.reduce()
-    event.onAppear.take(1)
-      .compactMap { [weak self] in self?.coreDataService.fetch(request: Task.fetchRequest() )}
-      .bind(to: state.tasks)
-      .disposed(by: disposeBag)
     
-    event.onAppear.take(1)
-      .map { PeriodType.allCases }
-      .compactMap { [weak self] in $0.compactMap { type in self?.dateService.fetchDate(type, date: Date()) } }
-      .bind(to: state.dates)
-      .disposed(by: disposeBag)
+    Observable.merge(
+      event.onAppear.take(1).asObservable(),
+      event.onRefresh.asObservable()
+    ).compactMap { [weak self] in self?.coreDataService.fetch(request: Task.fetchRequest() )}
+    .bind(to: state.tasks)
+    .disposed(by: disposeBag)
+
+    Observable.merge(
+      event.onAppear.take(1).asObservable(),
+      event.onRefresh.asObservable()
+    ).map { PeriodType.allCases }
+    .compactMap { [weak self] in $0.compactMap { type in self?.dateService.fetchDate(type, date: Date()) } }
+    .bind(to: state.dates)
+    .disposed(by: disposeBag)
     
     event.tappedAddButton
       .do(onNext: { [weak self] in

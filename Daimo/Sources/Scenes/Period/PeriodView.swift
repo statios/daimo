@@ -11,7 +11,7 @@ import InfiniteLayout
 
 protocol PeriodViewDelegate: class {
   func didSelectPeriod(_ type: PeriodType, date: Date)
-  func didEndDisplayPeriod(_ type: PeriodType?, date: Date)
+  func didEndDisplayPeriod(_ type: PeriodType?, date: Date, direction: Int)
 }
 
 final class PeriodView: BaseView {
@@ -96,8 +96,9 @@ extension PeriodView {
     viewModel.state.displayItems
       .asDriverOnErrorJustComplete()
       .drive(onNext: { [weak self] in
-        self?.periodDates = $0
-        self?.collectionView.reloadData()
+        guard let `self` = self else { return }
+        self.periodDates = $0
+        self.collectionView.reloadData()
       }).disposed(by: disposeBag)
     
     viewModel.state.updatePrefetchedDate
@@ -174,6 +175,6 @@ extension PeriodView: InfiniteCollectionViewDelegate {
       date: date
     )
     viewModel.event.requestDatePrefetch.accept(request)
-    delegate?.didEndDisplayPeriod(periodType, date: date)
+    delegate?.didEndDisplayPeriod(periodType, date: date, direction: direction)
   }
 }

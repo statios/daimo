@@ -35,10 +35,6 @@ final class PeriodViewModel: BaseViewModel {
 extension PeriodViewModel {
   override func reduce() {
     super.reduce()
-    
-    Task(content: "", periodType: 0, isDone: true, date: Date())
-    
-    
     event.onConfigure
       .map { $0.0.title }
       .bind(to: state.displayTitle)
