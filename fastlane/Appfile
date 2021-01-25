@@ -1,0 +1,8 @@
+app_identifier("com.sogihyeon.Daimo") # The bundle identifier of your app
+apple_id("sogih92@icloud.com") # Your Apple email address
+
+itc_team_id("120305732") # App Store Connect Team ID
+team_id("4YL8LS5ZJC") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
