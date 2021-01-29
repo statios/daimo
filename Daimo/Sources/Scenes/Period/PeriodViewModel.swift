@@ -47,10 +47,14 @@ extension PeriodViewModel {
     
     event.requestDatePrefetch
       .withLatestFrom(event.onConfigure) { [weak self] in
-        let prefetchedDate = self?.dateService.prefetchDate($1.0, direction: $0.direction, date: $0.date)
+        let prefetchedDate = self?.dateService.prefetchDate(
+          $1.0, direction: $0.direction, date: $0.date
+        )
         let plus = ($0.index + 3) % 7
         let minu = ($0.index + 4) % 7
-        let response = DatePrefetch.Response(date: prefetchedDate ?? Date(), index: $0.direction > 0 ? plus : minu)
+        let response = DatePrefetch.Response(
+          date: prefetchedDate ?? Date(),
+          index: $0.direction > 0 ? plus : minu)
         return response
       }.bind(to: state.updatePrefetchedDate)
       .disposed(by: disposeBag)

@@ -11,7 +11,7 @@ import RxSwift
 
 final class SplashViewController: BaseViewController {
   
-  let viewModel = SplashViewModel()
+  @Injected var viewModel: SplashViewModel
   
   let animationView = SplashAnimationView()
   
@@ -30,10 +30,6 @@ extension SplashViewController {
 }
 
 extension SplashViewController {
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-  }
-  
   override func setupBinding() {
     super.setupBinding()
     // Event

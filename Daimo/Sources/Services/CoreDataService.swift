@@ -10,10 +10,24 @@ import CoreData
 import UIKit
 
 protocol CoreDataServiceType {
-  func fetch<T: NSManagedObject>(request: NSFetchRequest<T>) -> [T]
-  @discardableResult func delete(object: NSManagedObject) -> Bool
-  @discardableResult func deleteAll<T: NSManagedObject>(request: NSFetchRequest<T>) -> Bool
-  @discardableResult func insert<T: NSManagedObject>(object: T) -> Bool
+  func fetch<T: NSManagedObject>(
+    request: NSFetchRequest<T>
+  ) -> [T]
+  
+  @discardableResult
+  func delete(
+    object: NSManagedObject
+  ) -> Bool
+  
+  @discardableResult
+  func deleteAll<T: NSManagedObject>(
+    request: NSFetchRequest<T>
+  ) -> Bool
+  
+  @discardableResult
+  func insert<T: NSManagedObject>(
+    object: T
+  ) -> Bool
 }
 
 class CoreDataService: CoreDataServiceType {
